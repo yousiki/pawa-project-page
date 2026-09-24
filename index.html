@@ -49,18 +49,20 @@
   4-step distilled model on the right. Within each half, the two players' POVs sit above their
   panoramas.</p>
   <div class="tabs" data-target="teaser">
-    <button data-src="static/videos/pawa/tw15-terrain_contour_traverse.mp4" class="active">Episode A</button>
+    <button data-src="static/videos/pawa/tw18-duet_screen_peek.mp4" class="active">Episode A</button>
     <button data-src="static/videos/pawa/tw10-landmark_marker_pair.mp4">Episode B</button>
     <button data-src="static/videos/pawa/tw08-duet_shadow_lesson.mp4">Episode C</button>
     <button data-src="static/videos/pawa/tw05-sightmark_natural_triangle.mp4">Episode D</button>
     <button data-src="static/videos/pawa/cv01-loopbuild_occlusion_reveal.mp4">Episode E</button>
   </div>
-  <video id="teaser" class="wide" src="static/videos/pawa/tw15-terrain_contour_traverse.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-  <p class="caption">Episodes A&ndash;E are the 10th, 30th, 50th, 70th and 90th percentiles of
-  PAWA (Distilled) POV LPIPS in the 30-episode two-player interaction tier (six of which are development episodes), chosen by rank
-  before visual inspection, so E is a hard case. Frame 0 is the given condition; the remaining
-  239 frames are forecasts from actions alone. Future positions, visibility and images are not
-  provided.</p>
+  <video id="teaser" class="wide" src="static/videos/pawa/tw18-duet_screen_peek.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
+  <p class="caption">Episodes A&ndash;E are ranked by PAWA (Distilled) POV LPIPS in the 30-episode
+  two-player interaction tier (six of which are development episodes) and chosen by rank before
+  visual inspection. B&ndash;E are the 30th, 50th, 70th and 90th percentiles, so E is a hard case.
+  A is the 7th percentile: the 10th-percentile episode and the next rank above it keep one player
+  in an unlit cave for most of the clip, so we took the adjacent rank below. Frame 0 is the given
+  condition; the remaining 239 frames are forecasts from actions alone. Future positions,
+  visibility and images are not provided.</p>
 </section>
 
 <section id="tldr" class="tldr">
@@ -194,9 +196,8 @@
   receive POV only and have no panoramic output, so the last tile shows the ground-truth panorama
   above PAWA's prediction.</p>
   <div class="tabs" data-target="compare">
-    <button data-src="static/videos/compare/tw18-duet_screen_peek.mp4" class="active">Median case</button>
+    <button data-src="static/videos/compare/tw18-duet_screen_peek.mp4" class="active">Median case &middot; A</button>
     <button data-src="static/videos/compare/tw06-loopbuild_step_back_review.mp4">Largest regression</button>
-    <button data-src="static/videos/compare/tw15-terrain_contour_traverse.mp4">A &middot; p10</button>
     <button data-src="static/videos/compare/tw10-landmark_marker_pair.mp4">B &middot; p30</button>
     <button data-src="static/videos/compare/tw08-duet_shadow_lesson.mp4">C &middot; p50</button>
     <button data-src="static/videos/compare/tw05-sightmark_natural_triangle.mp4">D &middot; p70</button>
@@ -205,7 +206,7 @@
   <video id="compare" class="wide" src="static/videos/compare/tw18-duet_screen_peek.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
   <p class="caption">The median case and the largest-regression case are the paper's qualitative
   figures. They are the lower median and the maximum of the per-episode change in POV LPIPS from
-  distillation. A&ndash;E are the LPIPS percentiles used above. Every model runs natively to 12&nbsp;s.
+  distillation. The median case is also Episode A above, and B&ndash;E are the same episodes as above. Every model runs natively to 12&nbsp;s.
   Tiles keep each model's native field of view and aspect ratio: Solaris and MultiWorld use their
   own preprocessing, action interfaces and resolutions, and MultiWorld is a cross-domain
   adaptation. These are descriptive comparisons, not matched-input evaluations.</p>
