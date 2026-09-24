@@ -57,7 +57,7 @@
   </div>
   <video id="teaser" class="wide" src="static/videos/pawa/tw15-terrain_contour_traverse.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
   <p class="caption">Episodes A&ndash;E are the 10th, 30th, 50th, 70th and 90th percentiles of
-  PAWA (Distilled) POV LPIPS among the 30 held-out two-player interaction episodes, chosen by rank
+  PAWA (Distilled) POV LPIPS in the 30-episode two-player interaction tier (six of which are development episodes), chosen by rank
   before visual inspection, so E is a hard case. Frame 0 is the given condition; the remaining
   239 frames are forecasts from actions alone. Future positions, visibility and images are not
   provided.</p>
@@ -241,8 +241,7 @@
     <button data-src="static/videos/population/n16c07-phase_shifted_ring_patrol.mp4">16 players</button>
   </div>
   <video id="pop" class="wide" src="static/videos/population/n04c06-loopbuild_riser_backcheck.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-  <p class="caption">For each population, the lower-median episode by PAWA (Distilled) POV LPIPS,
-  out of 12. The four-player clip also shows Gamma-World (Distilled). All tested populations occur
+  <p class="caption">4 players: the paper's qualitative case, the lower median of the per-episode change in POV LPIPS from distillation. 8 and 16 players: the lower-median episode by PAWA (Distilled) POV LPIPS. Each population has 12 episodes. The four-player clip also shows Gamma-World (Distilled). All tested populations occur
   in training, so these rollouts do not demonstrate generalization to unseen player counts.
   Visible errors in geometry, characters and occlusion remain.</p>
 
