@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="1560" height="560" preserveAspectRatio="xMinYMin meet" viewBox="0 0 1560 560" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="1560" height="560"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-560)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="0" width="1560" height="560" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="20" y="526" style="font-family: Helvetica-Bold; font-size: 32px;fill: rgb(9%,16%,22%); stroke:none;" transform="translate(0,1052) scale(1,-1)">Record interactions once. Render observations independently.</text>
+			<text x="20" y="495" style="font-family: Helvetica; font-size: 23px;fill: rgb(32%,39%,45%); stroke:none;" transform="translate(0,990) scale(1,-1)">Task-specific behavior, scalable simulation, and configurable observation coverage</text>
+			<rect x="20" y="463" width="290" height="4" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(45%,38%,65%); fill-rule: evenodd;"/>
+			<text x="20" y="430" style="font-family: Helvetica-Bold; font-size: 25px;fill: rgb(45%,38%,65%); stroke:none;" transform="translate(0,860) scale(1,-1)">a</text>
+			<text x="48" y="430" style="font-family: Helvetica-Bold; font-size: 26px;fill: rgb(9%,16%,22%); stroke:none;" transform="translate(0,860) scale(1,-1)">Scenario synthesis</text>
+			<rect x="350" y="463" width="320" height="4" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(22%,47%,65%); fill-rule: evenodd;"/>
+			<text x="350" y="430" style="font-family: Helvetica-Bold; font-size: 25px;fill: rgb(22%,47%,65%); stroke:none;" transform="translate(0,860) scale(1,-1)">b</text>
+			<text x="378" y="430" style="font-family: Helvetica-Bold; font-size: 26px;fill: rgb(9%,16%,22%); stroke:none;" transform="translate(0,860) scale(1,-1)">CPU-parallel capture</text>
+			<path d="M 330,450 L 330,115 Z" style="stroke: rgb(83%,87%,89%); stroke-linecap: butt; stroke-width: 1;"/>
+			<rect x="710" y="463" width="400" height="4" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,52%,47%); fill-rule: evenodd;"/>
+			<text x="710" y="430" style="font-family: Helvetica-Bold; font-size: 25px;fill: rgb(9%,52%,47%); stroke:none;" transform="translate(0,860) scale(1,-1)">c</text>
+			<text x="738" y="430" style="font-family: Helvetica-Bold; font-size: 26px;fill: rgb(9%,16%,22%); stroke:none;" transform="translate(0,860) scale(1,-1)">GPU replay rendering</text>
+			<path d="M 690,450 L 690,115 Z" style="stroke: rgb(83%,87%,89%); stroke-linecap: butt; stroke-width: 1;"/>
+			<rect x="1150" y="463" width="390" height="4" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(78%,49%,21%); fill-rule: evenodd;"/>
+			<text x="1150" y="430" style="font-family: Helvetica-Bold; font-size: 25px;fill: rgb(78%,49%,21%); stroke:none;" transform="translate(0,860) scale(1,-1)">d</text>
+			<text x="1178" y="430" style="font-family: Helvetica-Bold; font-size: 26px;fill: rgb(9%,16%,22%); stroke:none;" transform="translate(0,860) scale(1,-1)">Aligned observations</text>
+			<path d="M 1130,450 L 1130,115 Z" style="stroke: rgb(83%,87%,89%); stroke-linecap: butt; stroke-width: 1;"/>
+			<rect x="25" y="343" width="274" height="54" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(96%,94%,98%); fill-rule: evenodd;"/>
+			<text x="34.521" y="363" style="font-family: Helvetica-Bold; font-size: 22px;fill: rgb(45%,38%,65%); stroke:none;" transform="translate(0,726) scale(1,-1)">Goals + behavioral rules</text>
+			<path d="M 162,340 L 162,322 Z" style="stroke: rgb(45%,38%,65%); stroke-linecap: butt; stroke-width: 2.5;"/>
+			<polygon points="162 322, 166 332, 158 332" style="stroke: none; stroke-linecap: butt; stroke-width: 2; fill: rgb(45%,38%,65%); fill-rule: evenodd;"/>
+			<rect x="42" y="262" width="240" height="55" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(96%,94%,98%); fill-rule: evenodd;"/>
+			<text x="69" y="283" style="font-family: Helvetica-Bold; font-size: 27px;fill: rgb(45%,38%,65%); stroke:none;" transform="translate(0,566) scale(1,-1)">&lt;/&gt;</text>
+			<text x="116" y="283" style="font-family: Helvetica-Bold; font-size: 24px;fill: rgb(9%,16%,22%); stroke:none;" transform="translate(0,566) scale(1,-1)">Coding agent</text>
+			<path d="M 162,259 L 162,241 Z" style="stroke: rgb(45%,38%,65%); stroke-linecap: butt; stroke-width: 2.5;"/>
+			<polygon points="162 241, 166 251, 158 251" style="stroke: none; stroke-linecap: butt; stroke-width: 2; fill: rgb(45%,38%,65%); fill-rule: evenodd;"/>
+			<text x="69.3" y="214" style="font-family: Helvetica; font-size: 24px;fill: rgb(9%,16%,22%); stroke:none;" transform="translate(0,428) scale(1,-1)">Candidate scripts</text>
+			<text x="47.32950000000001" y="185" style="font-family: Helvetica; font-size: 21px;fill: rgb(32%,39%,45%); stroke:none;" transform="translate(0,370) scale(1,-1)">Trial capture + rendering</text>
+			<rect x="27" y="134" width="116" height="35" rx="17" ry="17" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,92%,97%); fill-rule: evenodd;"/>
+			<text x="70.75" y="145" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(45%,38%,65%); stroke:none;" transform="translate(0,290) scale(1,-1)">QC</text>
+			<rect x="153" y="134" width="145" height="35" rx="17" ry="17" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(94%,92%,97%); fill-rule: evenodd;"/>
+			<text x="173.231" y="145" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(45%,38%,65%); stroke:none;" transform="translate(0,290) scale(1,-1)">VLM review</text>
+			<path d="M 15,152 L 7,152 Z" style="stroke: rgb(45%,38%,65%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<path d="M 7,152 L 7,290 Z" style="stroke: rgb(45%,38%,65%); stroke-linecap: butt; stroke-width: 1.5; stroke-dasharray: 4, 4;"/>
+			<path d="M 7,290 L 37,290 Z" style="stroke: rgb(45%,38%,65%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<polygon points="37 290, 27 294, 27 286" style="stroke: none; stroke-linecap: butt; stroke-width: 2; fill: rgb(45%,38%,65%); fill-rule: evenodd;"/>
+			<path d="M 298,152 L 324,152 Z" style="stroke: rgb(45%,38%,65%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<path d="M 324,152 L 324,383 Z" style="stroke: rgb(45%,38%,65%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<path d="M 324,383 L 367,383 Z" style="stroke: rgb(45%,38%,65%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<polygon points="367 383, 357 387, 357 379" style="stroke: none; stroke-linecap: butt; stroke-width: 2; fill: rgb(45%,38%,65%); fill-rule: evenodd;"/>
+			<rect x="371" y="365" width="265" height="35" rx="17" ry="17" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(92%,95%,97%); fill-rule: evenodd;"/>
+			<text x="387.3435" y="376" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(22%,47%,65%); stroke:none;" transform="translate(0,752) scale(1,-1)">Accepted scenario library</text>
+			<polygon points="369 285, 494 340, 649 288, 524 230" style="stroke: rgb(22%,47%,65%); stroke-linecap: butt; stroke-width: 1; fill: rgb(91%,94%,96%); fill-rule: evenodd;"/>
+			<path d="M 387,294 L 541,241 Z" style="stroke: rgb(78%,85%,90%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 407,302 L 561,249 Z" style="stroke: rgb(78%,85%,90%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 427,310 L 581,257 Z" style="stroke: rgb(78%,85%,90%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 447,318 L 601,265 Z" style="stroke: rgb(78%,85%,90%); stroke-linecap: butt; stroke-width: 1;"/>
+			<rect x="425.1" y="305.9" width="9.800000000000011" height="9.800000000000011" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(22%,47%,65%); fill-rule: evenodd;"/>
+			<rect x="423.7" y="289.1" width="12.600000000000023" height="14.699999999999989" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(22%,47%,65%); fill-rule: evenodd;"/>
+			<path d="M 427.2,289.1 L 426.5,279.3 Z" style="stroke: rgb(22%,47%,65%); stroke-linecap: butt; stroke-width: 3.5;"/>
+			<path d="M 432.8,289.1 L 433.5,279.3 Z" style="stroke: rgb(22%,47%,65%); stroke-linecap: butt; stroke-width: 3.5;"/>
+			<path d="M 423.7,301 L 419.5,291.9 Z" style="stroke: rgb(22%,47%,65%); stroke-linecap: butt; stroke-width: 2.8;"/>
+			<path d="M 436.3,301 L 440.5,291.9 Z" style="stroke: rgb(22%,47%,65%); stroke-linecap: butt; stroke-width: 2.8;"/>
+			<rect x="477.1" y="319.9" width="9.800000000000011" height="9.800000000000011" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(78%,49%,21%); fill-rule: evenodd;"/>
+			<rect x="475.7" y="303.1" width="12.600000000000023" height="14.699999999999989" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(78%,49%,21%); fill-rule: evenodd;"/>
+			<path d="M 479.2,303.1 L 478.5,293.3 Z" style="stroke: rgb(78%,49%,21%); stroke-linecap: butt; stroke-width: 3.5;"/>
+			<path d="M 484.8,303.1 L 485.5,293.3 Z" style="stroke: rgb(78%,49%,21%); stroke-linecap: butt; stroke-width: 3.5;"/>
+			<path d="M 475.7,315 L 471.5,305.9 Z" style="stroke: rgb(78%,49%,21%); stroke-linecap: butt; stroke-width: 2.8;"/>
+			<path d="M 488.3,315 L 492.5,305.9 Z" style="stroke: rgb(78%,49%,21%); stroke-linecap: butt; stroke-width: 2.8;"/>
+			<rect x="529.1" y="298.9" width="9.799999999999955" height="9.800000000000011" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,52%,47%); fill-rule: evenodd;"/>
+			<rect x="527.7" y="282.1" width="12.600000000000023" height="14.699999999999989" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,52%,47%); fill-rule: evenodd;"/>
+			<path d="M 531.2,282.1 L 530.5,272.3 Z" style="stroke: rgb(9%,52%,47%); stroke-linecap: butt; stroke-width: 3.5;"/>
+			<path d="M 536.8,282.1 L 537.5,272.3 Z" style="stroke: rgb(9%,52%,47%); stroke-linecap: butt; stroke-width: 3.5;"/>
+			<path d="M 527.7,294 L 523.5,284.9 Z" style="stroke: rgb(9%,52%,47%); stroke-linecap: butt; stroke-width: 2.8;"/>
+			<path d="M 540.3,294 L 544.5,284.9 Z" style="stroke: rgb(9%,52%,47%); stroke-linecap: butt; stroke-width: 2.8;"/>
+			<rect x="577.1" y="303.9" width="9.799999999999955" height="9.800000000000011" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(45%,38%,65%); fill-rule: evenodd;"/>
+			<rect x="575.7" y="287.1" width="12.600000000000023" height="14.699999999999989" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(45%,38%,65%); fill-rule: evenodd;"/>
+			<path d="M 579.2,287.1 L 578.5,277.3 Z" style="stroke: rgb(45%,38%,65%); stroke-linecap: butt; stroke-width: 3.5;"/>
+			<path d="M 584.8,287.1 L 585.5,277.3 Z" style="stroke: rgb(45%,38%,65%); stroke-linecap: butt; stroke-width: 3.5;"/>
+			<path d="M 575.7,299 L 571.5,289.9 Z" style="stroke: rgb(45%,38%,65%); stroke-linecap: butt; stroke-width: 2.8;"/>
+			<path d="M 588.3,299 L 592.5,289.9 Z" style="stroke: rgb(45%,38%,65%); stroke-linecap: butt; stroke-width: 2.8;"/>
+			<rect x="493.1" y="269.9" width="9.800000000000011" height="9.800000000000011" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(22%,47%,65%); fill-rule: evenodd;"/>
+			<rect x="491.7" y="253.10000000000002" width="12.600000000000023" height="14.699999999999989" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(22%,47%,65%); fill-rule: evenodd;"/>
+			<path d="M 495.2,253.1 L 494.5,243.3 Z" style="stroke: rgb(22%,47%,65%); stroke-linecap: butt; stroke-width: 3.5;"/>
+			<path d="M 500.8,253.1 L 501.5,243.3 Z" style="stroke: rgb(22%,47%,65%); stroke-linecap: butt; stroke-width: 3.5;"/>
+			<path d="M 491.7,265 L 487.5,255.9 Z" style="stroke: rgb(22%,47%,65%); stroke-linecap: butt; stroke-width: 2.8;"/>
+			<path d="M 504.3,265 L 508.5,255.9 Z" style="stroke: rgb(22%,47%,65%); stroke-linecap: butt; stroke-width: 2.8;"/>
+			<rect x="609.1" y="275.9" width="9.799999999999955" height="9.800000000000011" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,52%,47%); fill-rule: evenodd;"/>
+			<rect x="607.7" y="259.1" width="12.600000000000023" height="14.699999999999989" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,52%,47%); fill-rule: evenodd;"/>
+			<path d="M 611.2,259.1 L 610.5,249.3 Z" style="stroke: rgb(9%,52%,47%); stroke-linecap: butt; stroke-width: 3.5;"/>
+			<path d="M 616.8,259.1 L 617.5,249.3 Z" style="stroke: rgb(9%,52%,47%); stroke-linecap: butt; stroke-width: 3.5;"/>
+			<path d="M 607.7,271 L 603.5,261.9 Z" style="stroke: rgb(9%,52%,47%); stroke-linecap: butt; stroke-width: 2.8;"/>
+			<path d="M 620.3,271 L 624.5,261.9 Z" style="stroke: rgb(9%,52%,47%); stroke-linecap: butt; stroke-width: 2.8;"/>
+			<text x="371.775" y="201" style="font-family: Helvetica-Bold; font-size: 25px;fill: rgb(9%,16%,22%); stroke:none;" transform="translate(0,402) scale(1,-1)">Shared Minecraft world</text>
+			<text x="363.546" y="170" style="font-family: Helvetica; font-size: 21px;fill: rgb(32%,39%,45%); stroke:none;" transform="translate(0,340) scale(1,-1)">Rust runtime controls N players</text>
+			<rect x="398" y="123" width="61" height="30" rx="3" ry="3" style="stroke: rgb(22%,47%,65%); stroke-linecap: butt; stroke-width: 1; fill: rgb(92%,95%,97%); fill-rule: evenodd;"/>
+			<rect x="407" y="132" width="8" height="12" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(22%,47%,65%); fill-rule: evenodd;"/>
+			<rect x="422" y="132" width="8" height="12" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(22%,47%,65%); fill-rule: evenodd;"/>
+			<rect x="437" y="132" width="8" height="12" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(22%,47%,65%); fill-rule: evenodd;"/>
+			<rect x="472" y="123" width="61" height="30" rx="3" ry="3" style="stroke: rgb(22%,47%,65%); stroke-linecap: butt; stroke-width: 1; fill: rgb(92%,95%,97%); fill-rule: evenodd;"/>
+			<rect x="481" y="132" width="8" height="12" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(22%,47%,65%); fill-rule: evenodd;"/>
+			<rect x="496" y="132" width="8" height="12" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(22%,47%,65%); fill-rule: evenodd;"/>
+			<rect x="511" y="132" width="8" height="12" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(22%,47%,65%); fill-rule: evenodd;"/>
+			<rect x="546" y="123" width="61" height="30" rx="3" ry="3" style="stroke: rgb(22%,47%,65%); stroke-linecap: butt; stroke-width: 1; fill: rgb(92%,95%,97%); fill-rule: evenodd;"/>
+			<rect x="555" y="132" width="8" height="12" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(22%,47%,65%); fill-rule: evenodd;"/>
+			<rect x="570" y="132" width="8" height="12" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(22%,47%,65%); fill-rule: evenodd;"/>
+			<rect x="585" y="132" width="8" height="12" rx="1" ry="1" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(22%,47%,65%); fill-rule: evenodd;"/>
+			<text x="336.03" y="95" style="font-family: Helvetica; font-size: 20px;fill: rgb(32%,39%,45%); stroke:none;" transform="translate(0,190) scale(1,-1)">Independent episodes on CPU workers</text>
+			<path d="M 665,287 L 705,287 Z" style="stroke: rgb(9%,16%,22%); stroke-linecap: butt; stroke-width: 2.5;"/>
+			<polygon points="705 287, 695 291, 695 283" style="stroke: none; stroke-linecap: butt; stroke-width: 2; fill: rgb(9%,16%,22%); fill-rule: evenodd;"/>
+			<rect x="730" y="339" width="92" height="41" rx="6" ry="6" style="stroke: rgb(9%,52%,47%); stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,95%,94%); fill-rule: evenodd;"/>
+			<ellipse cx="776.0" cy="380.0" rx="46.0" ry="9.0" style="stroke: rgb(9%,52%,47%); stroke-linecap: butt; stroke-width: 1; fill: rgb(83%,92%,90%); fill-rule: evenodd;"/>
+			<rect x="730" y="324" width="92" height="41" rx="6" ry="6" style="stroke: rgb(9%,52%,47%); stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,95%,94%); fill-rule: evenodd;"/>
+			<ellipse cx="776.0" cy="365.0" rx="46.0" ry="9.0" style="stroke: rgb(9%,52%,47%); stroke-linecap: butt; stroke-width: 1; fill: rgb(83%,92%,90%); fill-rule: evenodd;"/>
+			<rect x="730" y="309" width="92" height="41" rx="6" ry="6" style="stroke: rgb(9%,52%,47%); stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,95%,94%); fill-rule: evenodd;"/>
+			<ellipse cx="776.0" cy="350.0" rx="46.0" ry="9.0" style="stroke: rgb(9%,52%,47%); stroke-linecap: butt; stroke-width: 1; fill: rgb(83%,92%,90%); fill-rule: evenodd;"/>
+			<text x="738.2915" y="275" style="font-family: Helvetica-Bold; font-size: 23px;fill: rgb(9%,16%,22%); stroke:none;" transform="translate(0,550) scale(1,-1)">Replay</text>
+			<text x="735.727" y="250" style="font-family: Helvetica-Bold; font-size: 23px;fill: rgb(9%,16%,22%); stroke:none;" transform="translate(0,500) scale(1,-1)">archive</text>
+			<path d="M 831,329 L 879,329 Z" style="stroke: rgb(9%,52%,47%); stroke-linecap: butt; stroke-width: 2.5;"/>
+			<polygon points="879 329, 869 333, 869 325" style="stroke: none; stroke-linecap: butt; stroke-width: 2; fill: rgb(9%,52%,47%); fill-rule: evenodd;"/>
+			<rect x="899" y="356" width="179" height="29" rx="5" ry="5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,95%,94%); fill-rule: evenodd;"/>
+			<rect x="910" y="363" width="18" height="15" rx="2" ry="2" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,52%,47%); fill-rule: evenodd;"/>
+			<text x="945" y="364" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,52%,47%); stroke:none;" transform="translate(0,728) scale(1,-1)">GPU worker</text>
+			<rect x="899" y="318" width="179" height="29" rx="5" ry="5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,95%,94%); fill-rule: evenodd;"/>
+			<rect x="910" y="325" width="18" height="15" rx="2" ry="2" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,52%,47%); fill-rule: evenodd;"/>
+			<text x="945" y="326" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,52%,47%); stroke:none;" transform="translate(0,652) scale(1,-1)">GPU worker</text>
+			<rect x="899" y="280" width="179" height="29" rx="5" ry="5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,95%,94%); fill-rule: evenodd;"/>
+			<rect x="910" y="287" width="18" height="15" rx="2" ry="2" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,52%,47%); fill-rule: evenodd;"/>
+			<text x="945" y="288" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,52%,47%); stroke:none;" transform="translate(0,576) scale(1,-1)">GPU worker</text>
+			<text x="745.113" y="207" style="font-family: Helvetica-Bold; font-size: 23px;fill: rgb(9%,16%,22%); stroke:none;" transform="translate(0,414) scale(1,-1)">Choose cameras after capture</text>
+			<rect x="724" y="152" width="171" height="35" rx="17" ry="17" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,95%,94%); fill-rule: evenodd;"/>
+			<text x="739.789" y="163" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,52%,47%); stroke:none;" transform="translate(0,326) scale(1,-1)">Player cameras</text>
+			<rect x="905" y="152" width="196" height="35" rx="17" ry="17" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,95%,94%); fill-rule: evenodd;"/>
+			<text x="913.7855" y="163" style="font-family: Helvetica-Bold; font-size: 19px;fill: rgb(9%,52%,47%); stroke:none;" transform="translate(0,326) scale(1,-1)">Custom trajectories</text>
+			<text x="758.387" y="122" style="font-family: Helvetica; font-size: 22px;fill: rgb(32%,39%,45%); stroke:none;" transform="translate(0,244) scale(1,-1)">Re-render the same interaction</text>
+			<text x="775.492" y="95" style="font-family: Helvetica; font-size: 22px;fill: rgb(32%,39%,45%); stroke:none;" transform="translate(0,190) scale(1,-1)">without repeating gameplay</text>
+			<path d="M 1108,287 L 1144,287 Z" style="stroke: rgb(9%,16%,22%); stroke-linecap: butt; stroke-width: 2.5;"/>
+			<polygon points="1144 287, 1134 291, 1134 283" style="stroke: none; stroke-linecap: butt; stroke-width: 2; fill: rgb(9%,16%,22%); fill-rule: evenodd;"/>
+			<rect x="1164" y="340" width="86" height="48" rx="4" ry="4" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(98%,95%,90%); fill-rule: evenodd;"/>
+			<polygon points="1180 352, 1200 375, 1215 358, 1237 370, 1237 349, 1180 349" style="stroke: none; stroke-linecap: butt; stroke-width: 2; fill: rgb(86%,71%,48%); fill-rule: evenodd;"/>
+			<circle cx="1228" cy="377" r="5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(78%,49%,21%); fill-rule: evenodd;"/>
+			<text x="1265" y="356" style="font-family: Helvetica-Bold; font-size: 24px;fill: rgb(9%,16%,22%); stroke:none;" transform="translate(0,712) scale(1,-1)">POV RGB</text>
+			<rect x="1164" y="274" width="86" height="48" rx="4" ry="4" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(98%,95%,90%); fill-rule: evenodd;"/>
+			<path d="M 1174,314 L 1174,282 Z" style="stroke: rgb(78%,49%,21%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 1191,314 L 1191,282 Z" style="stroke: rgb(78%,49%,21%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 1208,314 L 1208,282 Z" style="stroke: rgb(78%,49%,21%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 1225,314 L 1225,282 Z" style="stroke: rgb(78%,49%,21%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 1242,314 L 1242,282 Z" style="stroke: rgb(78%,49%,21%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 1172,298 L 1242,298 Z" style="stroke: rgb(78%,49%,21%); stroke-linecap: butt; stroke-width: 1;"/>
+			<ellipse cx="1207.0" cy="298.0" rx="36.0" ry="16.0" style="stroke: rgb(78%,49%,21%); stroke-linecap: butt; stroke-width: 1.5; fill: none; fill-rule: evenodd;"/>
+			<text x="1265" y="290" style="font-family: Helvetica-Bold; font-size: 24px;fill: rgb(9%,16%,22%); stroke:none;" transform="translate(0,580) scale(1,-1)">Panoramic RGB</text>
+			<rect x="1164" y="208" width="86" height="48" rx="4" ry="4" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(98%,95%,90%); fill-rule: evenodd;"/>
+			<rect x="1173" y="217" width="14" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,12%,36%); fill-rule: evenodd;"/>
+			<rect x="1187" y="217" width="14" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(39%,26%,57%); fill-rule: evenodd;"/>
+			<rect x="1201" y="217" width="14" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(64%,39%,60%); fill-rule: evenodd;"/>
+			<rect x="1215" y="217" width="14" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(86%,66%,52%); fill-rule: evenodd;"/>
+			<rect x="1229" y="217" width="14" height="30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(96%,85%,58%); fill-rule: evenodd;"/>
+			<text x="1265" y="224" style="font-family: Helvetica-Bold; font-size: 24px;fill: rgb(9%,16%,22%); stroke:none;" transform="translate(0,448) scale(1,-1)">Depth sequences</text>
+			<text x="1164" y="170" style="font-family: Helvetica-Bold; font-size: 23px;fill: rgb(9%,16%,22%); stroke:none;" transform="translate(0,340) scale(1,-1)">Actions + camera poses</text>
+			<text x="1164" y="138" style="font-family: Helvetica; font-size: 21px;fill: rgb(32%,39%,45%); stroke:none;" transform="translate(0,276) scale(1,-1)">Common world-clock interval</text>
+			<text x="1164" y="109" style="font-family: Helvetica; font-size: 21px;fill: rgb(32%,39%,45%); stroke:none;" transform="translate(0,218) scale(1,-1)">Episode QC + provenance</text>
+			<path d="M 20,73 L 1540,73 Z" style="stroke: rgb(83%,87%,89%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<text x="20" y="39" style="font-family: Helvetica-Bold; font-size: 18px;fill: rgb(45%,38%,65%); stroke:none;" transform="translate(0,78) scale(1,-1)">EXTENSIBLE</text>
+			<text x="148" y="39" style="font-family: Helvetica; font-size: 22px;fill: rgb(9%,16%,22%); stroke:none;" transform="translate(0,78) scale(1,-1)">New scenarios</text>
+			<text x="373" y="39" style="font-family: Helvetica-Bold; font-size: 18px;fill: rgb(22%,47%,65%); stroke:none;" transform="translate(0,78) scale(1,-1)">DECOUPLED</text>
+			<text x="505" y="39" style="font-family: Helvetica; font-size: 22px;fill: rgb(9%,16%,22%); stroke:none;" transform="translate(0,78) scale(1,-1)">Simulation and rendering</text>
+			<text x="862" y="39" style="font-family: Helvetica-Bold; font-size: 18px;fill: rgb(9%,52%,47%); stroke:none;" transform="translate(0,78) scale(1,-1)">REUSABLE</text>
+			<text x="980" y="39" style="font-family: Helvetica; font-size: 22px;fill: rgb(9%,16%,22%); stroke:none;" transform="translate(0,78) scale(1,-1)">New views from existing recordings</text>
+		</g>
+	</g>
+</svg>
