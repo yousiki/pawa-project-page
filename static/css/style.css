@@ -124,3 +124,4 @@ pre {
   font: .82rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 footer { padding: 28px 16px; text-align: center; color: var(--muted); font: .8rem Inter, sans-serif; border-top: 1px solid var(--line); }
+details.table-wrap summary { cursor: pointer; font: 600 .9rem Inter, sans-serif; color: var(--accent); margin-bottom: 8px; }

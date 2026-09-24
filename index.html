@@ -26,7 +26,7 @@
 </nav>
 
 <header class="hero" id="top">
-  <video class="hero-bg" src="static/videos/pawa/tw10-landmark_marker_pair.mp4" autoplay muted loop playsinline></video>
+  <video class="hero-bg" src="static/videos/pawa/tw16-v7_covis_shared_column.mp4" autoplay muted loop playsinline></video>
   <div class="hero-inner">
     <h1><span class="name">PAWA</span>: Panoramic Action-conditioned<br>World Modeling for Multiple Agents</h1>
     <p class="authors">Anonymous Authors</p>
@@ -49,20 +49,16 @@
   4-step distilled model on the right. Within each half, the two players' POVs sit above their
   panoramas.</p>
   <div class="tabs" data-target="teaser">
-    <button data-src="static/videos/pawa/tw18-duet_screen_peek.mp4" class="active">Episode A</button>
-    <button data-src="static/videos/pawa/tw10-landmark_marker_pair.mp4">Episode B</button>
-    <button data-src="static/videos/pawa/tw08-duet_shadow_lesson.mp4">Episode C</button>
-    <button data-src="static/videos/pawa/tw05-sightmark_natural_triangle.mp4">Episode D</button>
-    <button data-src="static/videos/pawa/cv01-loopbuild_occlusion_reveal.mp4">Episode E</button>
+    <button data-src="static/videos/pawa/tw16-v7_covis_shared_column.mp4" class="active">Episode A</button>
+    <button data-src="static/videos/pawa/ez01-v7_covis_rail.mp4">Episode B</button>
+    <button data-src="static/videos/pawa/ez11-revisit_growing_cairn.mp4">Episode C</button>
+    <button data-src="static/videos/pawa/tw23-handoff_report_clover.mp4">Episode D</button>
+    <button data-src="static/videos/pawa/ez06-loopbuild_corner_retrace.mp4">Episode E</button>
   </div>
-  <video id="teaser" class="wide" src="static/videos/pawa/tw18-duet_screen_peek.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-  <p class="caption">Episodes A&ndash;E are ranked by PAWA (Distilled) POV LPIPS in the 30-episode
-  two-player interaction tier (six of which are development episodes) and chosen by rank before
-  visual inspection. B&ndash;E are the 30th, 50th, 70th and 90th percentiles, so E is a hard case.
-  A is the 7th percentile: the 10th-percentile episode and the next rank above it keep one player
-  in an unlit cave for most of the clip, so we took the adjacent rank below. Frame 0 is the given
-  condition; the remaining 239 frames are forecasts from actions alone. Future positions,
-  visibility and images are not provided.</p>
+  <video id="teaser" class="wide" src="static/videos/pawa/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
+  <p class="caption">Episodes are chosen by checking the ground truth by eye for windows in which the two players appear in each other's POV. Most of the 42 two-player evaluation windows keep the players apart or behind terrain, so this selection favors the interactions the model is meant to handle and is not representative of the evaluation tiers. A and D come from the 30-episode interaction tier; B, C and E from the
+  12-episode low-motion tier. Frame 0 is the given condition; the remaining 239 frames are
+  forecasts from actions alone. Future positions, visibility and images are not provided.</p>
 </section>
 
 <section id="tldr" class="tldr">
@@ -196,20 +192,21 @@
   receive POV only and have no panoramic output, so the last tile shows the ground-truth panorama
   above PAWA's prediction.</p>
   <div class="tabs" data-target="compare">
-    <button data-src="static/videos/compare/tw18-duet_screen_peek.mp4" class="active">Median case &middot; A</button>
-    <button data-src="static/videos/compare/tw06-loopbuild_step_back_review.mp4">Largest regression</button>
-    <button data-src="static/videos/compare/tw10-landmark_marker_pair.mp4">B &middot; p30</button>
-    <button data-src="static/videos/compare/tw08-duet_shadow_lesson.mp4">C &middot; p50</button>
-    <button data-src="static/videos/compare/tw05-sightmark_natural_triangle.mp4">D &middot; p70</button>
-    <button data-src="static/videos/compare/cv01-loopbuild_occlusion_reveal.mp4">E &middot; p90</button>
+    <button data-src="static/videos/compare/tw16-v7_covis_shared_column.mp4" class="active">A &middot; interaction</button>
+    <button data-src="static/videos/compare/ez01-v7_covis_rail.mp4">B &middot; low-motion</button>
+    <button data-src="static/videos/compare/ez11-revisit_growing_cairn.mp4">C &middot; low-motion</button>
+    <button data-src="static/videos/compare/tw23-handoff_report_clover.mp4">D &middot; interaction</button>
+    <button data-src="static/videos/compare/ez06-loopbuild_corner_retrace.mp4">E &middot; low-motion</button>
+    <button data-src="static/videos/compare/ez05-occl_wade_sightline.mp4">F &middot; low-motion</button>
+    <button data-src="static/videos/compare/tw06-loopbuild_step_back_review.mp4">G &middot; interaction &middot; largest regression</button>
   </div>
-  <video id="compare" class="wide" src="static/videos/compare/tw18-duet_screen_peek.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-  <p class="caption">The median case and the largest-regression case are the paper's qualitative
-  figures. They are the lower median and the maximum of the per-episode change in POV LPIPS from
-  distillation. The median case is also Episode A above, and B&ndash;E are the same episodes as above. Every model runs natively to 12&nbsp;s.
-  Tiles keep each model's native field of view and aspect ratio: Solaris and MultiWorld use their
-  own preprocessing, action interfaces and resolutions, and MultiWorld is a cross-domain
-  adaptation. These are descriptive comparisons, not matched-input evaluations.</p>
+  <video id="compare" class="wide" src="static/videos/compare/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
+  <p class="caption">A&ndash;E are the episodes above. F is another low-motion episode with mutual
+  visibility. G is the paper's largest-regression case: the maximum per-episode change in POV
+  LPIPS from distillation. Every model runs natively to 12&nbsp;s. Tiles keep each model's native
+  field of view and aspect ratio: Solaris and MultiWorld use their own preprocessing, action
+  interfaces and resolutions, and MultiWorld is a cross-domain adaptation. These are descriptive
+  comparisons, not matched-input evaluations.</p>
 
   <div class="table-wrap">
   <table>
@@ -230,6 +227,26 @@
     </tbody>
   </table>
   </div>
+  <details class="table-wrap">
+    <summary>Low-motion tier (12 episodes)</summary>
+  <table>
+    <caption>Same conditions and metrics as Table 1. Pooled FID/FVD must not be compared with the
+    interaction tier. No best/second marks: the paper ranks this table together with a 4-step
+    causal control that is omitted here.</caption>
+    <thead><tr><th>Model</th><th>Stream</th><th>FVD&darr;</th><th>FID&darr;</th><th>LPIPS&darr;</th><th>PSNR&uarr;</th><th>SSIM&uarr;</th></tr></thead>
+    <tbody>
+      <tr><td>Gamma-World (Bidirectional)</td><td>POV</td><td>333.4</td><td>67.25</td><td>0.557</td><td>12.87</td><td>0.453</td></tr>
+      <tr><td>Gamma-World (Causal)</td><td>POV</td><td>323.7</td><td>70.16</td><td>0.572</td><td>13.16</td><td>0.435</td></tr>
+      <tr><td>Gamma-World (Distilled)</td><td>POV</td><td>340.1</td><td>69.14</td><td>0.551</td><td>12.98</td><td>0.416</td></tr>
+      <tr><td>Solaris</td><td>POV</td><td>482.7</td><td>79.50</td><td>0.593</td><td>11.49</td><td>0.429</td></tr>
+      <tr><td>MultiWorld</td><td>POV</td><td>715.8</td><td>185.33</td><td>0.642</td><td>12.68</td><td>0.381</td></tr>
+      <tr class="ours"><td>PAWA (Causal)</td><td>POV</td><td>157.0</td><td>41.61</td><td>0.380</td><td>16.95</td><td>0.546</td></tr>
+      <tr class="ours"><td>PAWA (Distilled)</td><td>POV</td><td>175.0</td><td>46.18</td><td>0.437</td><td>15.80</td><td>0.502</td></tr>
+      <tr class="ours sep"><td>PAWA (Causal)</td><td>PANO</td><td>158.8</td><td>35.91</td><td>0.209</td><td>20.75</td><td>0.653</td></tr>
+      <tr class="ours"><td>PAWA (Distilled)</td><td>PANO</td><td>166.5</td><td>37.72</td><td>0.226</td><td>20.08</td><td>0.623</td></tr>
+    </tbody>
+  </table>
+  </details>
 </section>
 
 <section id="population">
@@ -280,10 +297,10 @@
   checkpoint, recorded noise, seed and sampler stay the same, and nothing is retrained. POV
   prediction degrades clearly. The panorama changes only slightly.</p>
   <div class="tabs" data-target="abl">
-    <button data-src="static/videos/ablation/tw18-duet_screen_peek.mp4" class="active">Median case</button>
-    <button data-src="static/videos/ablation/tw08-duet_shadow_lesson.mp4">C &middot; p50</button>
+    <button data-src="static/videos/ablation/tw16-v7_covis_shared_column.mp4" class="active">A &middot; interaction</button>
+    <button data-src="static/videos/ablation/tw23-handoff_report_clover.mp4">D &middot; interaction</button>
   </div>
-  <video id="abl" class="wide" src="static/videos/ablation/tw18-duet_screen_peek.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
+  <video id="abl" class="wide" src="static/videos/ablation/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
   <div class="table-wrap">
   <table>
     <caption><b>Table 3.</b> 30 two-player episodes; each stream pools 14,340 forecast frames for FID
