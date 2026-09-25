@@ -26,3 +26,17 @@ var seen = new IntersectionObserver(function (entries) {
   });
 }, { threshold: 0.25 });
 document.querySelectorAll('video[autoplay]').forEach(function (v) { seen.observe(v); });
+
+// Right-align numeric table cells and the headers above them.
+document.querySelectorAll('table').forEach(function (t) {
+  var numericCols = {};
+  t.querySelectorAll('tbody tr').forEach(function (tr) {
+    Array.prototype.forEach.call(tr.cells, function (c) {
+      if (/^[\d.≈]/.test(c.textContent.trim())) { c.classList.add('num'); numericCols[tr.cells.length - c.cellIndex] = true; }
+    });
+  });
+  var head = t.querySelector('thead tr:last-child');
+  if (head) Array.prototype.forEach.call(head.cells, function (c) {
+    if (numericCols[head.cells.length - c.cellIndex]) c.classList.add('num');
+  });
+});
