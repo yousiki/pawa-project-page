@@ -50,16 +50,16 @@
   </figure>
   <div class="tabs" data-target="teaser">
     <button data-src="static/videos/pawa/tw16-v7_covis_shared_column.mp4" class="active">Episode A</button>
-    <button data-src="static/videos/pawa/ez01-v7_covis_rail.mp4">Episode B</button>
-    <button data-src="static/videos/pawa/ez11-revisit_growing_cairn.mp4">Episode C</button>
-    <button data-src="static/videos/pawa/tw23-handoff_report_clover.mp4">Episode D</button>
-    <button data-src="static/videos/pawa/ez06-loopbuild_corner_retrace.mp4">Episode E</button>
+    <button data-src="static/videos/pawa/tw18-duet_screen_peek.mp4">Episode B</button>
+    <button data-src="static/videos/pawa/ez03-stereo_parallel_rail.mp4">Episode C</button>
+    <button data-src="static/videos/pawa/cv04-circuit_bearing_ladder.mp4">Episode D</button>
   </div>
   <video id="teaser" class="wide" src="static/videos/pawa/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
   <p class="caption">12&nbsp;s rollouts, both four-step: Gamma-World (Distilled), which has no
-  panoramic output, and PAWA (Distilled) with its panoramas below. Episodes were chosen for players
-  who see each other, so they are not representative samples. Episode A is the paper's Figure 1
-  case.</p>
+  panoramic output, and PAWA (Distilled) with its panoramas below. Episodes were checked against the
+  reference for co-players in view and for no obvious generation inconsistency, so they are
+  curated rather than representative. Episode A is the paper's Figure 1 case; D is a development
+  episode.</p>
 </section>
 
 <section id="tldr" class="tldr">
@@ -158,17 +158,13 @@
   <h3 id="comparison">Comparison with multiplayer world models</h3>
   <div class="tabs" data-target="compare">
     <button data-src="static/videos/compare/tw16-v7_covis_shared_column.mp4" class="active">Episode A</button>
-    <button data-src="static/videos/compare/ez01-v7_covis_rail.mp4">Episode B</button>
-    <button data-src="static/videos/compare/ez11-revisit_growing_cairn.mp4">Episode C</button>
-    <button data-src="static/videos/compare/tw23-handoff_report_clover.mp4">Episode D</button>
-    <button data-src="static/videos/compare/ez06-loopbuild_corner_retrace.mp4">Episode E</button>
-    <button data-src="static/videos/compare/tw18-duet_screen_peek.mp4">Episode F</button>
-    <button data-src="static/videos/compare/tw06-loopbuild_step_back_review.mp4">Episode G</button>
+    <button data-src="static/videos/compare/tw18-duet_screen_peek.mp4">Episode B</button>
+    <button data-src="static/videos/compare/ez03-stereo_parallel_rail.mp4">Episode C</button>
+    <button data-src="static/videos/compare/cv04-circuit_bearing_ladder.mp4">Episode D</button>
   </div>
   <video id="compare" class="wide" src="static/videos/compare/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
   <p class="caption">All models on the same episode, synchronized; the reference closes the grid.
-  Episodes A&ndash;E are those above, F is another episode with co-players in view, and G has the
-  largest POV LPIPS increase from distillation. Models keep their native resolution and
+  Episodes A&ndash;D are those above. Models keep their native resolution and
   preprocessing.</p>
   <p>In the two-player results of Table 1, PAWA (Causal) achieves the best POV scores on four of
   the five metrics and PAWA (Distilled) the best FID, and both variants thus surpass every baseline
@@ -270,13 +266,13 @@
   the players best explain the rotation of their stream, against 6% by chance.</p>
   <div class="tabs" data-target="pop">
     <button data-src="static/videos/population/n04c11-v7_ground_revisit.mp4" class="active">4 players</button>
-    <button data-src="static/videos/population/n08c08-ring_mosaic_bloom.mp4">8 players</button>
+    <button data-src="static/videos/population/n08c11-split_and_reunite.mp4">8 players</button>
     <button data-src="static/videos/population/n16c07-phase_shifted_ring_patrol.mp4">16 players</button>
   </div>
   <video id="pop" class="wide" src="static/videos/population/n04c11-v7_ground_revisit.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
   <p class="caption">Every player's POV and panorama, reference last. 4 players: the paper's
-  four-player figure case, with Gamma-World (Distilled). 8 and 16 players: lower-median episodes by
-  PAWA (Distilled) POV LPIPS.</p>
+  four-player figure case, with Gamma-World (Distilled). 8 and 16 players: the episodes with the
+  fewest visible generation errors among 12, chosen by eye against the reference.</p>
   <div class="table-wrap">
   <table>
     <caption><b>Table 2.</b> 12 episodes per population, all players, 239 forecast frames.
@@ -335,11 +331,12 @@
   contribute comparably. The POV prediction thus draws on the panoramic context.</p>
   <div class="tabs" data-target="abl">
     <button data-src="static/videos/ablation/tw16-v7_covis_shared_column.mp4" class="active">Episode A</button>
-    <button data-src="static/videos/ablation/tw23-handoff_report_clover.mp4">Episode D</button>
+    <button data-src="static/videos/ablation/tw18-duet_screen_peek.mp4">Episode B</button>
   </div>
   <video id="abl" class="wide" src="static/videos/ablation/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
   <p class="caption">PAWA (Distilled) with and without its cross-attention sites, then the
-  reference. Letters match the comparison above.</p>
+  reference. Letters match the comparison above; the intervention was run on the interaction
+  tier, which contains A and B.</p>
   <div class="table-wrap">
   <table>
     <caption><b>Table 3.</b> Inference-time removal of the seven cross-attention sites from PAWA
