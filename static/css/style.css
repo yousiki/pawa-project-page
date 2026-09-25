@@ -118,9 +118,5 @@ tr.ours td { background: var(--ours); }
 tr.sep td { border-top: 2px solid #c9d1de; }
 
 .scope li { margin-bottom: 8px; }
-pre {
-  overflow-x: auto; padding: 18px 20px; background: #f5f7fb; border-radius: 10px;
-  font: .82rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
-}
 footer { padding: 28px 16px; text-align: center; color: var(--muted); font: .8rem Inter, sans-serif; border-top: 1px solid var(--line); }
 details.table-wrap summary { cursor: pointer; font: 600 .9rem Inter, sans-serif; color: var(--accent); margin-bottom: 8px; }
