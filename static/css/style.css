@@ -161,7 +161,7 @@ caption {
 caption b { color: var(--ink); }
 th, td { padding: 7px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; text-align: left; }
 .num { text-align: right; }
-td[rowspan] { vertical-align: top; font-weight: 600; background: #fff; color: var(--ink); }
+td[rowspan], td[rowspan].num { text-align: left; vertical-align: top; font-weight: 600; background: #fff; color: var(--ink); }
 thead th { border-bottom: 1.5px solid var(--ink); color: var(--ink); font-weight: 600; font-size: .8rem; }
 tr.ours td { background: var(--ours); }
 tr.sep td, tr.sep th { border-top: 1.5px solid #c8d1df; }

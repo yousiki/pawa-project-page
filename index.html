@@ -58,7 +58,7 @@
   <p class="caption">12&nbsp;s rollouts, both four-step: Gamma-World (Distilled), which has no
   panoramic output, and PAWA (Distilled) with its panoramas below. Episodes were checked against the
   reference for co-players in view and for no obvious generation inconsistency, so they are
-  curated rather than representative. Episode A is the paper's Figure 1 case; D is a development
+  curated rather than representative. Episode A is the case of the paper's Figure 1 and two-player comparison figure; D is a development
   episode.</p>
 </section>
 
@@ -126,8 +126,8 @@
   <div class="stats">
     <div class="stat"><span class="value">120.1</span><span class="vs">vs 267.1</span><span class="label">Two-player POV FVD, PAWA (Causal) vs the strongest baseline</span></div>
     <div class="stat"><span class="value">0.223</span><span class="vs">20.41 dB</span><span class="label">Panorama LPIPS and PSNR, predicted jointly with the POV</span></div>
-    <div class="stat"><span class="value">6%</span><span class="vs">vs 16%</span><span class="label">Frames showing players where none exist, vs Gamma-World (Distilled)</span></div>
-    <div class="stat"><span class="value">73%</span><span class="vs">vs 6% chance</span><span class="label">Streams driven by their own player's actions at 16 players</span></div>
+    <div class="stat"><span class="value">111.5</span><span class="vs">vs 267.1</span><span class="label">Eight-player POV FVD, PAWA (Causal) vs the best Gamma-World variant</span></div>
+    <div class="stat"><span class="value">73%</span><span class="vs">vs 6% chance</span><span class="label">Players whose own actions best explain their stream at 16 players</span></div>
   </div>
 
   <div class="setup">
@@ -136,9 +136,7 @@
       <p>We evaluate PAWA (Causal), sampled with 35 steps, and PAWA
   (Distilled), sampled with four steps per causal block. The baselines are the bidirectional,
   causal and distilled variants of Gamma-World, Solaris, and MultiWorld, which runs its official
-  50-step autoregressive sampler with Minecraft controls mapped to its action space. Each baseline
-  receives the initial POV observations, and PAWA additionally receives the initial panoramas
-  defined by its task.</p>
+  50-step autoregressive sampler with Minecraft controls mapped to its action space. No prior multiplayer world model accepts panoramas, and the baselines thus receive only the initial POV observations. PAWA also receives the initial panoramas, yet surpasses every baseline even when its POV stream ignores them (Table 3).</p>
     </div>
     <div class="setup-item">
       <h4>Protocol</h4>
@@ -171,17 +169,32 @@
   on every POV metric. Against the strongest baseline, Gamma-World (Bidirectional), PAWA (Causal)
   lowers POV FVD from 267.1 to 120.1 and LPIPS from 0.567 to 0.421, and with the same four-step
   budget as Gamma-World (Distilled), PAWA (Distilled) reaches POV FVD 138.1 against 279.7. The
-  panoramic predictions reach LPIPS 0.223 and 20.41&nbsp;dB PSNR. The advantage persists with four
-  players, where PAWA (Causal) reduces POV FVD from 323.6 for the best Gamma-World variant to
-  138.0. Co-players re-entering a view after at least one second outside it reach LPIPS 0.58
-  against 0.65 for the best baseline, and the panorama forecasts co-players outside the POV as
-  reliably as those inside it. A VLM judge further finds that PAWA shows players where none exist
-  on 6% of the frames against 16% for Gamma-World (Distilled).</p>
+  panoramic predictions reach LPIPS 0.223 and 20.41&nbsp;dB PSNR. Episode A, the case of the
+  paper's two-player figure, shows the difference qualitatively: Gamma-World (Distilled) replaces
+  the co-player of Player&nbsp;1 with a differently dressed character and loses the co-player of
+  Player&nbsp;2 after 4&nbsp;s, Solaris drops the co-player of Player&nbsp;2, and MultiWorld stalls
+  after 4&nbsp;s with the co-player of Player&nbsp;1 lost. PAWA keeps both co-players in view with a
+  consistent appearance throughout the 12-second rollout. The advantage persists with four players,
+  where PAWA (Causal) reduces POV FVD from 323.6 for the best Gamma-World variant to 138.0.
+  Co-players re-entering a view after at least one second outside it reach LPIPS 0.58 against 0.65
+  for the best baseline, and the panorama forecasts co-players outside the POV as reliably as those
+  inside it. Figure 4 shows two such re-entries, where PAWA brings the co-player back while the
+  baselines lose it or keep it in view throughout.</p>
+  <figure>
+    <img src="static/img/reentry-examples.jpg" alt="A co-player leaving and re-entering the view: Reference, Solaris, Gamma-World and PAWA">
+    <figcaption><b>Figure 4. A co-player leaving and re-entering the view.</b> In (a) the co-player
+    walks around behind the player, and in (b) it steps out to the side and returns. Green boxes mark
+    the co-player where it appears correctly, red boxes mark a co-player kept in view while it should
+    be hidden or a wrong character, and dashed red boxes mark where the reference shows a co-player
+    that the model has lost. Solaris and Gamma-World keep the co-player in view, replace it or lose
+    it at the return, whereas the panorama of PAWA (Distilled) tracks the co-player outside the POV
+    and its POV shows the co-player again after the return.</figcaption>
+  </figure>
   <div class="table-wrap">
   <table>
     <caption><b>Table 1.</b> Two-player interaction tier with 30 episodes and 239 forecast frames
-    per player. PAWA additionally receives the initial panoramas. <b>Bold</b> and
-    <u>underline</u> mark the best and second best within each stream.</caption>
+    per player. Baselines support only POV input, and PAWA additionally receives the initial
+    panoramas. <b>Bold</b> and <u>underline</u> mark the best and second best within each stream.</caption>
     <thead><tr><th>Model</th><th>Stream</th><th>FVD&darr;</th><th>FID&darr;</th><th>LPIPS&darr;</th><th>PSNR&uarr;</th><th>SSIM&uarr;</th></tr></thead>
     <tbody>
       <tr><td>Gamma-World (Bidirectional)</td><td>POV</td><td>267.1</td><td>56.63</td><td>0.567</td><td>13.08</td><td>0.478</td></tr>
@@ -191,8 +204,8 @@
       <tr><td>MultiWorld</td><td>POV</td><td>771.2</td><td>186.06</td><td>0.667</td><td>11.76</td><td>0.395</td></tr>
       <tr class="ours"><td>PAWA (Causal)</td><td>POV</td><td><b>120.1</b></td><td><u>30.80</u></td><td><b>0.421</b></td><td><b>16.86</b></td><td><b>0.562</b></td></tr>
       <tr class="ours"><td>PAWA (Distilled)</td><td>POV</td><td><u>138.1</u></td><td><b>28.40</b></td><td><u>0.465</u></td><td><u>15.38</u></td><td><u>0.516</u></td></tr>
-      <tr class="ours sep"><td>PAWA (Causal)</td><td>PANO</td><td><b>88.0</b></td><td><b>26.53</b></td><td><b>0.223</b></td><td><b>20.41</b></td><td><b>0.643</b></td></tr>
-      <tr class="ours"><td>PAWA (Distilled)</td><td>PANO</td><td><u>98.1</u></td><td><u>28.26</u></td><td><u>0.243</u></td><td><u>19.77</u></td><td><u>0.617</u></td></tr>
+      <tr class="ours sep"><td>PAWA (Causal)</td><td>Panorama</td><td><b>88.0</b></td><td><b>26.53</b></td><td><b>0.223</b></td><td><b>20.41</b></td><td><b>0.643</b></td></tr>
+      <tr class="ours"><td>PAWA (Distilled)</td><td>Panorama</td><td><u>98.1</u></td><td><u>28.26</u></td><td><u>0.243</u></td><td><u>19.77</u></td><td><u>0.617</u></td></tr>
     </tbody>
   </table>
   </div>
@@ -200,8 +213,7 @@
     <summary>Low-motion tier (12 episodes)</summary>
   <table>
     <caption>Conditions and metrics follow Table 1. Pooled distances must not be compared with the
-    interaction tier. No best/second marks: the paper ranks this table together with a 4-step
-    causal control that is omitted here.</caption>
+    interaction tier. The paper also reports a 4-step causal control and MAE, omitted here.</caption>
     <thead><tr><th>Model</th><th>Stream</th><th>FVD&darr;</th><th>FID&darr;</th><th>LPIPS&darr;</th><th>PSNR&uarr;</th><th>SSIM&uarr;</th></tr></thead>
     <tbody>
       <tr><td>Gamma-World (Bidirectional)</td><td>POV</td><td>333.4</td><td>67.25</td><td>0.557</td><td>12.87</td><td>0.453</td></tr>
@@ -211,8 +223,8 @@
       <tr><td>MultiWorld</td><td>POV</td><td>715.8</td><td>185.33</td><td>0.642</td><td>12.68</td><td>0.381</td></tr>
       <tr class="ours"><td>PAWA (Causal)</td><td>POV</td><td>157.0</td><td>41.61</td><td>0.380</td><td>16.95</td><td>0.546</td></tr>
       <tr class="ours"><td>PAWA (Distilled)</td><td>POV</td><td>175.0</td><td>46.18</td><td>0.437</td><td>15.80</td><td>0.502</td></tr>
-      <tr class="ours sep"><td>PAWA (Causal)</td><td>PANO</td><td>158.8</td><td>35.91</td><td>0.209</td><td>20.75</td><td>0.653</td></tr>
-      <tr class="ours"><td>PAWA (Distilled)</td><td>PANO</td><td>166.5</td><td>37.72</td><td>0.226</td><td>20.08</td><td>0.623</td></tr>
+      <tr class="ours sep"><td>PAWA (Causal)</td><td>Panorama</td><td>158.8</td><td>35.91</td><td>0.209</td><td>20.75</td><td>0.653</td></tr>
+      <tr class="ours"><td>PAWA (Distilled)</td><td>Panorama</td><td>166.5</td><td>37.72</td><td>0.226</td><td>20.08</td><td>0.623</td></tr>
     </tbody>
   </table>
   </details>
@@ -221,49 +233,28 @@
   <table>
     <caption>Co-player LPIPS in the POV over the 10 frames after a co-player re-enters a player's
     view, having been outside it for at least 20 frames. Static repeats the conditioning frame. The
-    last column is the change of PAWA (Distilled) relative to the best baseline minus the same
-    change for time-matched co-players that stayed in view, with 95% episode-bootstrap
-    intervals.</caption>
-    <thead><tr><th>Players</th><th>Events</th><th>PAWA</th><th>Best baseline</th><th>Static</th><th>PAWA &minus; best</th><th>Relative to in-view</th></tr></thead>
+    last column is the paired change of PAWA (Distilled) relative to the best baseline with 95%
+    episode-bootstrap intervals.</caption>
+    <thead><tr><th>Players</th><th>Events</th><th>PAWA</th><th>Best baseline</th><th>Static</th><th>PAWA &minus; best</th></tr></thead>
     <tbody>
-      <tr><td>2</td><td>48</td><td>0.582</td><td>0.654</td><td>0.635</td><td>&minus;0.071 [&minus;0.116, &minus;0.023]</td><td>+0.011 [&minus;0.033, 0.061]</td></tr>
-      <tr><td>4</td><td>111</td><td>0.603</td><td>0.649</td><td>0.647</td><td>&minus;0.046 [&minus;0.076, &minus;0.018]</td><td>+0.031 [&minus;0.003, 0.063]</td></tr>
-      <tr><td>8</td><td>505</td><td>0.649</td><td>0.710</td><td>0.688</td><td>&minus;0.061 [&minus;0.081, &minus;0.040]</td><td>&minus;0.013 [&minus;0.032, 0.007]</td></tr>
-    </tbody>
-  </table>
-  </details>
-  <details class="table-wrap">
-    <summary>VLM judgment of co-player re-entry</summary>
-  <table>
-    <caption>Success is the fraction of re-entry frames on which the judge sees a player near the
-    expected region, located is the stricter fraction whose detected box centre falls inside the
-    expected region, and hallucination is the fraction of frames without any co-player in the
-    reference on which the model shows one. Only frames where the judge confirms the co-player in
-    the reference are counted, and values are episode means.</caption>
-    <thead>
-      <tr><th></th><th colspan="3" style="text-align:center">Two players</th><th colspan="3" style="text-align:center">Four players</th></tr>
-      <tr><th>Model</th><th>Success&uarr;</th><th>Located&uarr;</th><th>Halluc.&darr;</th><th>Success&uarr;</th><th>Located&uarr;</th><th>Halluc.&darr;</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Gamma-World (Bidirectional)</td><td>0.25</td><td>0.13</td><td>0.05</td><td>0.05</td><td>0.00</td><td>0.00</td></tr>
-      <tr><td>Gamma-World (Causal)</td><td>0.20</td><td>0.10</td><td>0.09</td><td>0.14</td><td>0.12</td><td>0.14</td></tr>
-      <tr><td>Gamma-World (Distilled)</td><td>0.20</td><td>0.18</td><td>0.14</td><td>0.17</td><td>0.04</td><td>0.19</td></tr>
-      <tr><td>Solaris</td><td>0.15</td><td>0.07</td><td>0.15</td><td>N/A</td><td>N/A</td><td>N/A</td></tr>
-      <tr><td>MultiWorld</td><td>0.26</td><td>0.08</td><td>0.08</td><td>N/A</td><td>N/A</td><td>N/A</td></tr>
-      <tr class="ours"><td>PAWA (Causal)</td><td>0.12</td><td>0.10</td><td>0.08</td><td>0.36</td><td>0.12</td><td>0.03</td></tr>
-      <tr class="ours"><td>PAWA (Distilled)</td><td>0.26</td><td>0.19</td><td>0.03</td><td>0.21</td><td>0.10</td><td>0.08</td></tr>
+      <tr><td>2</td><td>48</td><td>0.582</td><td>0.654</td><td>0.635</td><td>&minus;0.071 [&minus;0.116, &minus;0.023]</td></tr>
+      <tr><td>4</td><td>111</td><td>0.603</td><td>0.649</td><td>0.647</td><td>&minus;0.046 [&minus;0.076, &minus;0.018]</td></tr>
+      <tr><td>8</td><td>505</td><td>0.649</td><td>0.710</td><td>0.688</td><td>&minus;0.061 [&minus;0.081, &minus;0.040]</td></tr>
     </tbody>
   </table>
   </details>
 
   <h3 id="population">Scaling the player population</h3>
-  <p>The evaluated Gamma-World configuration provides at most four player codes, whereas the
+  <p>The released Gamma-World configuration provides four simplex player codes, whereas the
   quadratic-phase codebook of PAWA assigns a distinct identity to every player of larger sessions.
-  With eight and sixteen players, which only PAWA supports among the evaluated models, the
-  distilled model obtains POV FVD scores of 141.3 and 116.7, respectively. Scenarios and pool sizes
-  differ across populations, and comparisons are therefore made within each population. Each
-  stream also stays bound to its own actions, since at sixteen players the own commands of 73% of
-  the players best explain the rotation of their stream, against 6% by chance.</p>
+  Extending the simplex player encoding to eight codes lets Gamma-World run with eight players, but
+  on the same pool its bidirectional variant collapses to POV FVD 1707.7 and its best variant
+  reaches 267.1, against 141.3 for PAWA (Distilled) and 111.5 for PAWA (Causal), which also lowers
+  LPIPS from 0.586 to 0.458. With sixteen players, which only PAWA supports among the evaluated
+  models, the distilled model obtains POV FVD 116.7. Scenarios and pool sizes differ across
+  populations, and comparisons are therefore made within each population. Each stream also stays
+  bound to its own actions, since at sixteen players the own actions of 73% of the players best
+  explain the rotation of their stream, against 6% by chance.</p>
   <div class="tabs" data-target="pop">
     <button data-src="static/videos/population/n04c11-v7_ground_revisit.mp4" class="active">4 players</button>
     <button data-src="static/videos/population/n08c11-split_and_reunite.mp4">8 players</button>
@@ -276,7 +267,9 @@
   <div class="table-wrap">
   <table>
     <caption><b>Table 2.</b> 12 episodes per population, all players, 239 forecast frames.
-    Scenarios and pool sizes differ between populations, so compare within a population only.</caption>
+    Scenarios and pool sizes differ between populations, so compare within a population only. At
+    eight players, Gamma-World runs with its simplex player encoding extended from four to eight
+    codes on the same pool. The paper also reports a 4-step causal control and MAE, omitted here.</caption>
     <thead><tr><th>Players</th><th>Model</th><th>Stream</th><th>FVD&darr;</th><th>FID&darr;</th><th>LPIPS&darr;</th><th>PSNR&uarr;</th><th>SSIM&uarr;</th></tr></thead>
     <tbody>
       <tr><td rowspan="7">4</td><td>Gamma-World (Bidirectional)</td><td>POV</td><td>752.3</td><td>142.95</td><td>0.633</td><td>13.34</td><td>0.487</td></tr>
@@ -284,41 +277,42 @@
       <tr><td>Gamma-World (Distilled)</td><td>POV</td><td>323.6</td><td>56.65</td><td>0.577</td><td>12.39</td><td>0.440</td></tr>
       <tr class="ours"><td>PAWA (Causal)</td><td>POV</td><td>138.0</td><td>33.49</td><td>0.427</td><td>16.41</td><td>0.550</td></tr>
       <tr class="ours"><td>PAWA (Distilled)</td><td>POV</td><td>167.3</td><td>33.86</td><td>0.481</td><td>15.08</td><td>0.506</td></tr>
-      <tr class="ours"><td>PAWA (Causal)</td><td>PANO</td><td>161.9</td><td>32.79</td><td>0.254</td><td>19.08</td><td>0.630</td></tr>
-      <tr class="ours"><td>PAWA (Distilled)</td><td>PANO</td><td>194.1</td><td>32.94</td><td>0.264</td><td>18.67</td><td>0.619</td></tr>
-      <tr class="sep"><td rowspan="4">8</td><td>PAWA (Causal)</td><td>POV</td><td>111.5</td><td>32.32</td><td>0.458</td><td>15.06</td><td>0.536</td></tr>
-      <tr><td>PAWA (Distilled)</td><td>POV</td><td>141.3</td><td>28.90</td><td>0.517</td><td>13.71</td><td>0.494</td></tr>
-      <tr><td>PAWA (Causal)</td><td>PANO</td><td>127.9</td><td>27.42</td><td>0.294</td><td>17.31</td><td>0.591</td></tr>
-      <tr><td>PAWA (Distilled)</td><td>PANO</td><td>135.6</td><td>29.52</td><td>0.301</td><td>16.72</td><td>0.577</td></tr>
-      <tr class="sep"><td rowspan="4">16</td><td>PAWA (Causal)</td><td>POV</td><td>92.2</td><td>28.39</td><td>0.467</td><td>15.50</td><td>0.554</td></tr>
-      <tr><td>PAWA (Distilled)</td><td>POV</td><td>116.7</td><td>23.96</td><td>0.520</td><td>14.15</td><td>0.511</td></tr>
-      <tr><td>PAWA (Causal)</td><td>PANO</td><td>93.6</td><td>23.65</td><td>0.333</td><td>16.87</td><td>0.570</td></tr>
-      <tr><td>PAWA (Distilled)</td><td>PANO</td><td>92.5</td><td>20.95</td><td>0.333</td><td>16.66</td><td>0.567</td></tr>
+      <tr class="ours"><td>PAWA (Causal)</td><td>Panorama</td><td>161.9</td><td>32.79</td><td>0.254</td><td>19.08</td><td>0.630</td></tr>
+      <tr class="ours"><td>PAWA (Distilled)</td><td>Panorama</td><td>194.1</td><td>32.94</td><td>0.264</td><td>18.67</td><td>0.619</td></tr>
+      <tr class="sep"><td rowspan="7">8</td><td>Gamma-World (Bidirectional)</td><td>POV</td><td>1707.7</td><td>213.93</td><td>0.681</td><td>12.83</td><td>0.497</td></tr>
+      <tr><td>Gamma-World (Causal)</td><td>POV</td><td>297.3</td><td>48.84</td><td>0.606</td><td>12.21</td><td>0.453</td></tr>
+      <tr><td>Gamma-World (Distilled)</td><td>POV</td><td>267.1</td><td>48.27</td><td>0.586</td><td>11.56</td><td>0.432</td></tr>
+      <tr class="ours"><td>PAWA (Causal)</td><td>POV</td><td>111.5</td><td>32.32</td><td>0.458</td><td>15.06</td><td>0.536</td></tr>
+      <tr class="ours"><td>PAWA (Distilled)</td><td>POV</td><td>141.3</td><td>28.90</td><td>0.517</td><td>13.71</td><td>0.494</td></tr>
+      <tr class="ours"><td>PAWA (Causal)</td><td>Panorama</td><td>127.9</td><td>27.42</td><td>0.294</td><td>17.31</td><td>0.591</td></tr>
+      <tr class="ours"><td>PAWA (Distilled)</td><td>Panorama</td><td>135.6</td><td>29.52</td><td>0.301</td><td>16.72</td><td>0.577</td></tr>
+      <tr class="ours sep"><td rowspan="4">16</td><td>PAWA (Causal)</td><td>POV</td><td>92.2</td><td>28.39</td><td>0.467</td><td>15.50</td><td>0.554</td></tr>
+      <tr class="ours"><td>PAWA (Distilled)</td><td>POV</td><td>116.7</td><td>23.96</td><td>0.520</td><td>14.15</td><td>0.511</td></tr>
+      <tr class="ours"><td>PAWA (Causal)</td><td>Panorama</td><td>93.6</td><td>23.65</td><td>0.333</td><td>16.87</td><td>0.570</td></tr>
+      <tr class="ours"><td>PAWA (Distilled)</td><td>Panorama</td><td>92.5</td><td>20.95</td><td>0.333</td><td>16.66</td><td>0.567</td></tr>
     </tbody>
   </table>
   </div>
   <details class="table-wrap">
-    <summary>Action following and control binding</summary>
+    <summary>Action following</summary>
   <table>
-    <caption>Top: correlation between the commanded yaw and the yaw rotation estimated from the
-    generated POV over 0.5&nbsp;s windows, and its mean absolute error in degrees. Bottom: the
-    fraction of players whose own commands best explain the rotation of their stream among all
-    players, with chance in parentheses. Reference applies the estimator to the recorded videos and
-    bounds the attainable score.</caption>
-    <thead><tr><th>Yaw correlation / error</th><th>2 players, easy</th><th>2 players, hard</th><th>4 players</th><th>8 players</th><th>16 players</th></tr></thead>
+    <caption>Top: mean absolute error in degrees per 0.5&nbsp;s window between the yaw rotation
+    estimated from the generated POV and the same estimate on the recorded video. Bottom: the
+    fraction of players whose own actions best explain the rotation of their generated stream among
+    all players, with chance in parentheses and the recorded videos as the attainable ceiling.</caption>
+    <thead><tr><th>Yaw error&darr;</th><th>2, low-motion</th><th>2, interaction</th><th>4</th><th>8</th><th>16</th></tr></thead>
     <tbody>
-      <tr><td>Reference</td><td>0.910</td><td>0.888</td><td>0.901</td><td>0.872</td><td>0.801</td></tr>
-      <tr class="ours"><td>PAWA (Causal)</td><td>0.839 / 2.1</td><td>0.849 / 4.8</td><td>0.832 / 4.8</td><td>0.847 / 5.3</td><td>0.793 / 6.8</td></tr>
-      <tr class="ours"><td>PAWA (Distilled)</td><td>0.702 / 3.2</td><td>0.811 / 5.8</td><td>0.804 / 5.4</td><td>0.770 / 6.7</td><td>0.719 / 7.8</td></tr>
-      <tr><td>Gamma-World (Distilled)</td><td>0.758 / 3.7</td><td>0.772 / 8.4</td><td>0.771 / 7.8</td><td>0.798 / 8.0</td><td>N/A</td></tr>
-      <tr><td>Gamma-World (Bidirectional)</td><td>0.590</td><td>0.706</td><td>0.370</td><td>0.144</td><td>N/A</td></tr>
-      <tr><td>Solaris</td><td>0.533</td><td>0.640</td><td>N/A</td><td>N/A</td><td>N/A</td></tr>
-      <tr class="sep"><th>Control binding</th><th></th><th>2 players (0.50)</th><th>4 players (0.26)</th><th>8 players (0.13)</th><th>16 players (0.06)</th></tr>
-      <tr><td>Reference</td><td></td><td>0.98</td><td>0.98</td><td>0.96</td><td>0.86</td></tr>
+      <tr><td>Gamma-World (Bidirectional)</td><td>4.65</td><td>8.55</td><td>11.16</td><td>12.23</td><td>N/A</td></tr>
+      <tr><td>Gamma-World (Causal)</td><td>4.77</td><td>8.80</td><td>8.55</td><td>8.45</td><td>N/A</td></tr>
+      <tr><td>Gamma-World (Distilled)</td><td>3.68</td><td>8.35</td><td>7.77</td><td>8.00</td><td>N/A</td></tr>
+      <tr><td>Solaris</td><td>7.72</td><td>13.10</td><td>N/A</td><td>N/A</td><td>N/A</td></tr>
+      <tr><td>MultiWorld</td><td>6.26</td><td>13.90</td><td>N/A</td><td>N/A</td><td>N/A</td></tr>
+      <tr class="ours"><td>PAWA (Causal)</td><td><b>2.10</b></td><td><b>4.81</b></td><td><b>4.83</b></td><td><b>5.32</b></td><td><b>6.75</b></td></tr>
+      <tr class="ours"><td>PAWA (Distilled)</td><td><u>3.17</u></td><td><u>5.79</u></td><td><u>5.38</u></td><td><u>6.74</u></td><td><u>7.75</u></td></tr>
+      <tr class="sep"><th>Action binding&uarr;</th><th></th><th>2 (0.50)</th><th>4 (0.26)</th><th>8 (0.13)</th><th>16 (0.06)</th></tr>
+      <tr><td>Recorded videos</td><td></td><td>0.98</td><td>0.98</td><td>0.96</td><td>0.86</td></tr>
       <tr class="ours"><td>PAWA (Causal)</td><td></td><td>0.95</td><td>0.98</td><td>0.92</td><td>0.83</td></tr>
       <tr class="ours"><td>PAWA (Distilled)</td><td></td><td>0.93</td><td>0.94</td><td>0.90</td><td>0.73</td></tr>
-      <tr><td>Gamma-World (Distilled)</td><td></td><td>1.00</td><td>1.00</td><td>0.94</td><td>N/A</td></tr>
-      <tr><td>Gamma-World (Bidirectional)</td><td></td><td>0.95</td><td>0.56</td><td>0.13</td><td>N/A</td></tr>
     </tbody>
   </table>
   </details>
