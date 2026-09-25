@@ -296,8 +296,10 @@
     </tbody>
   </table>
   </div>
-  <p class="note">PSNR, SSIM and LPIPS average the 239 forecast frames, players and episodes. FID
-  pools the same frames, and FVD pools I3D features of 16-frame clips.</p>
+  <p class="note">PSNR uses pixel MSE over each player's 239-frame forecast window, while SSIM
+  and LPIPS average the forecast frames. These metrics are averaged first across players within
+  each episode and then equally across episodes. FID pools all forecast frames, and FVD pools
+  I3D features of 16-frame clips.</p>
   <details class="table-wrap">
     <summary>Low-motion tier (12 episodes)</summary>
   <table>
@@ -326,8 +328,9 @@
   quadratic-phase codebook of PAWA assigns a distinct identity to every player of larger sessions.
   With four players, PAWA (Causal) reduces POV FVD from 323.6 for the best Gamma-World variant to
   138.0 and outperforms it on every POV metric. With eight and sixteen players, which only PAWA
-  supports among the evaluated models, the distilled model keeps POV FVD between 116.7 and 167.3,
-  within the range of the two-player results, and its LPIPS rises only moderately.</p>
+  supports among the evaluated models, the distilled model obtains POV FVD scores of 141.3 and
+  116.7, respectively. Scenarios and pool sizes differ across populations, so comparisons are made
+  within each population.</p>
   <div class="tabs" data-target="pop">
     <button data-src="static/videos/population/n04c11-v7_ground_revisit.mp4" class="active">4 players</button>
     <button data-src="static/videos/population/n08c08-ring_mosaic_bloom.mp4">8 players</button>
