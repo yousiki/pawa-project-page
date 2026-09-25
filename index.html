@@ -53,9 +53,10 @@
     whose frame carries a matching dashed border, onto the forecast panorama at the same time.
     Panoramas are cropped to &plusmn;55&deg; latitude for display.</figcaption>
   </figure>
-  <p class="lede">The videos below show full 12&nbsp;s rollouts at 20&nbsp;fps: ground truth on the
-  left, PAWA (Distilled) on the right. In each half, the two players' POVs sit above their
-  panoramas. Episode A is the episode used in all of the paper's two-player figures.</p>
+  <p class="lede">The videos below compare full 12&nbsp;s rollouts at 20&nbsp;fps with the same
+  four-step budget: Gamma-World (Distilled) on the left, PAWA (Distilled) on the right. Each shows
+  the two players' POVs side by side; PAWA's panoramas sit below, since Gamma-World has no
+  panoramic output. The recorded reference appears in the comparison further down. Episode A is the episode used in all of the paper's two-player figures.</p>
   <div class="tabs" data-target="teaser">
     <button data-src="static/videos/pawa/tw16-v7_covis_shared_column.mp4" class="active">Episode A</button>
     <button data-src="static/videos/pawa/ez01-v7_covis_rail.mp4">Episode B</button>
@@ -64,7 +65,7 @@
     <button data-src="static/videos/pawa/ez06-loopbuild_corner_retrace.mp4">Episode E</button>
   </div>
   <video id="teaser" class="wide" src="static/videos/pawa/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-  <p class="caption">We chose these episodes by checking the ground truth for windows in which the
+  <p class="caption">We chose these episodes by checking the recorded reference for windows in which the
   two players appear in each other's POV. Most of the 42 two-player evaluation windows keep the
   players apart or behind terrain, so this selection favors interactions and does not represent
   the evaluation tiers. A and D come from the 30-episode interaction tier, and B, C and E from the
@@ -237,9 +238,9 @@
   </div>
   <h3>PAWA configurations on the same episode</h3>
   <video class="wide" src="static/videos/stages/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-  <p class="caption">Episode A with the recorded reference, the causal checkpoint sampled with four
-  steps before distillation, PAWA (Causal) with 35 steps and PAWA (Distilled) with four, as in the
-  paper's appendix figure. Each tile shows both players' POVs above their panoramas. Co-players
+  <p class="caption">Episode A with the causal checkpoint sampled with four steps before
+  distillation, PAWA (Causal) with 35 steps and PAWA (Distilled) with four, followed by the recorded
+  reference, as in the paper's appendix figure. Each tile shows both players' POVs above their panoramas. Co-players
   remain visible in both distilled POVs, with pose and position differences from the reference.
   This is a visual comparison, not an identity or cross-view consistency measurement.</p>
 </section>
@@ -263,8 +264,8 @@
   </div>
   <video id="compare" class="wide" src="static/videos/compare/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
   <p class="caption">Every model plays the same episode, synchronized frame by frame. External
-  models have no panoramic output, so the last tile shows the ground-truth panorama above PAWA's
-  prediction. A&ndash;E are the episodes above; A is the case of the paper's two-player comparison
+  models have no panoramic output, so the second-to-last tile shows PAWA's predicted panorama above
+  the reference panorama, and the recorded reference POV closes the grid. A&ndash;E are the episodes above; A is the case of the paper's two-player comparison
   figures. F is another interaction-tier episode in which the co-players appear in the PAWA forecasts. G has the largest per-episode increase in POV LPIPS from distillation. Tiles keep
   each model's native field of view and aspect ratio; resolutions, preprocessing and action
   interfaces differ across models.</p>
@@ -340,7 +341,7 @@
   <p class="caption">Each clip shows every player's POV and panorama, folded into a grid in player
   order. 4 players: the episode of the paper's four-player figure, selected after visual
   inspection of the 12 four-player cases for a clear shared scene and visible co-players; the clip
-  also shows Gamma-World (Distilled). 8 and 16 players: the lower-median episode of 12 by PAWA
+  also shows Gamma-World (Distilled). The reference is the last tile in every clip. 8 and 16 players: the lower-median episode of 12 by PAWA
   (Distilled) POV LPIPS. All tested populations occur in training, so these rollouts do not
   demonstrate generalization to unseen player counts. Co-player trajectories differ from the
   reference, and visibility varies by view and time.</p>
@@ -387,7 +388,7 @@
   <video id="abl" class="wide" src="static/videos/ablation/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
   <p class="caption">Letters match the episodes in the comparison above. The inference-time
   intervention was run on the interaction tier only, so the clips use its episodes A and D. Each
-  tile shows both players' POVs above their panoramas.</p>
+  tile shows both players' POVs above their panoramas, and the reference is last.</p>
   <div class="table-wrap">
   <table>
     <caption><b>Table 3.</b> Inference-time removal of the seven cross-tower sites from PAWA
