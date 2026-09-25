@@ -32,7 +32,7 @@ document.querySelectorAll('table').forEach(function (t) {
   var numericCols = {};
   t.querySelectorAll('tbody tr').forEach(function (tr) {
     Array.prototype.forEach.call(tr.cells, function (c) {
-      if (/^[\d.≈]/.test(c.textContent.trim())) { c.classList.add('num'); numericCols[tr.cells.length - c.cellIndex] = true; }
+      if (/^[\d.≈+−]/.test(c.textContent.trim())) { c.classList.add('num'); numericCols[tr.cells.length - c.cellIndex] = true; }
     });
   });
   var head = t.querySelector('thead tr:last-child');

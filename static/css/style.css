@@ -59,7 +59,7 @@ a.btn:hover { background: rgba(60, 100, 220, .35); color: #fff; }
 /* Body */
 main { padding: 0 16px 64px; }
 section { max-width: var(--measure); margin: 0 auto; padding-top: 56px; }
-section#samples, section#comparison, section#population, section#analysis { max-width: 1240px; }
+section#samples, section#experiments { max-width: 1240px; }
 section > p, section > h2, section > h3, section > .table-wrap, section > .cards, section > figure:not(:has(img[src*="teaser"])) {
   max-width: var(--measure); margin-left: auto; margin-right: auto;
 }
@@ -112,7 +112,7 @@ caption { caption-side: top; text-align: left; padding-bottom: 10px; color: var(
 th, td { padding: 6px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
 th, td { text-align: left; }
 .num { text-align: right; }
-#population td[rowspan] { vertical-align: top; font-weight: 600; background: #fff; }
+td[rowspan] { vertical-align: top; font-weight: 600; background: #fff; }
 thead th { border-bottom: 2px solid var(--ink); font-weight: 600; }
 tr.ours td { background: var(--ours); }
 tr.sep td { border-top: 2px solid #c9d1de; }
