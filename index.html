@@ -258,14 +258,15 @@
     <button data-src="static/videos/compare/ez11-revisit_growing_cairn.mp4">C &middot; low-motion</button>
     <button data-src="static/videos/compare/tw23-handoff_report_clover.mp4">D &middot; interaction</button>
     <button data-src="static/videos/compare/ez06-loopbuild_corner_retrace.mp4">E &middot; low-motion</button>
-    <button data-src="static/videos/compare/ez05-occl_wade_sightline.mp4">F &middot; low-motion</button>
+    <button data-src="static/videos/compare/cv06-v7_ground_bank.mp4">F &middot; interaction &middot; development</button>
     <button data-src="static/videos/compare/tw06-loopbuild_step_back_review.mp4">G &middot; interaction &middot; largest regression</button>
   </div>
   <video id="compare" class="wide" src="static/videos/compare/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
   <p class="caption">Every model plays the same episode, synchronized frame by frame. External
   models have no panoramic output, so the last tile shows the ground-truth panorama above PAWA's
   prediction. A&ndash;E are the episodes above; A is the case of the paper's two-player comparison
-  figures. F is another low-motion episode with mutual visibility. G has the largest per-episode increase in POV LPIPS from distillation. Tiles keep
+  figures. F is an interaction-tier episode with mutual visibility; it is one of the six development
+  episodes used in checkpoint selection. G has the largest per-episode increase in POV LPIPS from distillation. Tiles keep
   each model's native field of view and aspect ratio; resolutions, preprocessing and action
   interfaces differ across models.</p>
 
@@ -378,10 +379,13 @@
   0.510, while the panoramic scores change little. Removing only the pano&rarr;POV direction
   accounts for the entire loss, and early and late sites contribute comparably.</p>
   <div class="tabs" data-target="abl">
-    <button data-src="static/videos/ablation/tw16-v7_covis_shared_column.mp4" class="active">A &middot; interaction</button>
-    <button data-src="static/videos/ablation/tw23-handoff_report_clover.mp4">D &middot; interaction</button>
+    <button data-src="static/videos/ablation/tw16-v7_covis_shared_column.mp4" class="active">Episode A</button>
+    <button data-src="static/videos/ablation/tw23-handoff_report_clover.mp4">Episode D</button>
   </div>
   <video id="abl" class="wide" src="static/videos/ablation/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
+  <p class="caption">Letters match the episodes in the comparison above. The inference-time
+  intervention was run on the interaction tier only, so the clips use its episodes A and D. Each
+  tile shows both players' POVs above their panoramas.</p>
   <div class="table-wrap">
   <table>
     <caption><b>Table 3.</b> Inference-time removal of the seven cross-tower sites from PAWA
