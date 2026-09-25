@@ -55,7 +55,7 @@
   </figure>
   <p class="lede">The videos below show full 12&nbsp;s rollouts at 20&nbsp;fps: ground truth on the
   left, PAWA (Distilled) on the right. In each half, the two players' POVs sit above their
-  panoramas. Episode A is the episode of Figure 1.</p>
+  panoramas. Episode A is the episode used in all of the paper's two-player figures.</p>
   <div class="tabs" data-target="teaser">
     <button data-src="static/videos/pawa/tw16-v7_covis_shared_column.mp4" class="active">Episode A</button>
     <button data-src="static/videos/pawa/ez01-v7_covis_rail.mp4">Episode B</button>
@@ -235,6 +235,13 @@
       are trained on 2, 4, 8 and 16 players.</p>
     </div>
   </div>
+  <h3>PAWA configurations on the same episode</h3>
+  <video class="wide" src="static/videos/stages/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
+  <p class="caption">Episode A with the recorded reference, the causal checkpoint sampled with four
+  steps before distillation, PAWA (Causal) with 35 steps and PAWA (Distilled) with four, as in the
+  paper's appendix figure. Each tile shows both players' POVs above their panoramas. Co-players
+  remain visible in both distilled POVs, with pose and position differences from the reference.
+  This is a visual comparison, not an identity or cross-view consistency measurement.</p>
 </section>
 
 <section id="comparison">
@@ -257,8 +264,8 @@
   <video id="compare" class="wide" src="static/videos/compare/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
   <p class="caption">Every model plays the same episode, synchronized frame by frame. External
   models have no panoramic output, so the last tile shows the ground-truth panorama above PAWA's
-  prediction. A&ndash;E are the episodes above, and F is another low-motion episode with mutual
-  visibility. G has the largest per-episode increase in POV LPIPS from distillation. Tiles keep
+  prediction. A&ndash;E are the episodes above; A is the case of the paper's two-player comparison
+  figures. F is another low-motion episode with mutual visibility. G has the largest per-episode increase in POV LPIPS from distillation. Tiles keep
   each model's native field of view and aspect ratio; resolutions, preprocessing and action
   interfaces differ across models.</p>
 
@@ -322,16 +329,18 @@
   supports among the evaluated models, the distilled model keeps POV FVD between 116.7 and 167.3,
   within the range of the two-player results, and its LPIPS rises only moderately.</p>
   <div class="tabs" data-target="pop">
-    <button data-src="static/videos/population/n04c06-loopbuild_riser_backcheck.mp4" class="active">4 players</button>
+    <button data-src="static/videos/population/n04c11-v7_ground_revisit.mp4" class="active">4 players</button>
     <button data-src="static/videos/population/n08c08-ring_mosaic_bloom.mp4">8 players</button>
     <button data-src="static/videos/population/n16c07-phase_shifted_ring_patrol.mp4">16 players</button>
   </div>
-  <video id="pop" class="wide" src="static/videos/population/n04c06-loopbuild_riser_backcheck.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
+  <video id="pop" class="wide" src="static/videos/population/n04c11-v7_ground_revisit.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
   <p class="caption">Each clip shows every player's POV and panorama, folded into a grid in player
-  order. 4 players: the paper's four-player qualitative case, which also shows Gamma-World
-  (Distilled). 8 and 16 players: the lower-median episode of 12 by PAWA (Distilled) POV LPIPS. All
-  tested populations occur in training, so these rollouts do not demonstrate generalization to
-  unseen player counts. Visible errors in geometry, characters and occlusion remain.</p>
+  order. 4 players: the episode of the paper's four-player figure, selected after visual
+  inspection of the 12 four-player cases for a clear shared scene and visible co-players; the clip
+  also shows Gamma-World (Distilled). 8 and 16 players: the lower-median episode of 12 by PAWA
+  (Distilled) POV LPIPS. All tested populations occur in training, so these rollouts do not
+  demonstrate generalization to unseen player counts. Co-player trajectories differ from the
+  reference, and visibility varies by view and time.</p>
 
   <div class="table-wrap">
   <table>
