@@ -24,9 +24,10 @@
 </nav>
 
 <header class="hero" id="top">
-  <video class="hero-bg" src="static/videos/pawa/tw16-v7_covis_shared_column.mp4" autoplay muted loop playsinline></video>
+  <video class="hero-bg" src="static/videos/data/n64-observer.mp4" autoplay muted loop playsinline></video>
   <div class="hero-inner">
     <h1><span class="name">PAWA</span>: Panoramic Action-conditioned<br>World Modeling for Multiple Agents</h1>
+    <p class="tagline">Jointly forecasting every player's first-person and panoramic video in a shared Minecraft world.</p>
     <p class="authors">Anonymous Authors</p>
     <p class="venue">Paper under double-blind review &middot; ICLR 2027 submission</p>
     <div class="buttons">
@@ -122,19 +123,37 @@
 
 <section id="experiments">
   <h2>Experiments</h2>
-  <p><b>Models and baselines.</b> We evaluate PAWA (Causal), sampled with 35 steps, and PAWA
+  <div class="stats">
+    <div class="stat"><span class="value">120.1</span><span class="vs">vs 267.1</span><span class="label">Two-player POV FVD, PAWA (Causal) vs the strongest baseline</span></div>
+    <div class="stat"><span class="value">0.223</span><span class="vs">20.41 dB</span><span class="label">Panorama LPIPS and PSNR, predicted jointly with the POV</span></div>
+    <div class="stat"><span class="value">6%</span><span class="vs">vs 16%</span><span class="label">Frames showing players where none exist, vs Gamma-World (Distilled)</span></div>
+    <div class="stat"><span class="value">73%</span><span class="vs">vs 6% chance</span><span class="label">Streams driven by their own player's actions at 16 players</span></div>
+  </div>
+
+  <div class="setup">
+    <div class="setup-item">
+      <h4>Models and baselines</h4>
+      <p>We evaluate PAWA (Causal), sampled with 35 steps, and PAWA
   (Distilled), sampled with four steps per causal block. The baselines are the bidirectional,
   causal and distilled variants of Gamma-World, Solaris, and MultiWorld, which runs its official
   50-step autoregressive sampler with Minecraft controls mapped to its action space. Each baseline
   receives the initial POV observations, and PAWA additionally receives the initial panoramas
   defined by its task.</p>
-  <p><b>Protocol.</b> The main comparison uses 30 two-player interaction episodes of 12 seconds at
+    </div>
+    <div class="setup-item">
+      <h4>Protocol</h4>
+      <p>The main comparison uses 30 two-player interaction episodes of 12 seconds at
   20&nbsp;Hz, and separate sets of 12 episodes cover four, eight and sixteen players. All
   evaluation episodes are absent from the final training split.</p>
-  <p><b>Metrics.</b> PSNR uses pixel MSE over each player's 239-frame forecast window, while SSIM
+    </div>
+    <div class="setup-item">
+      <h4>Metrics</h4>
+      <p>PSNR uses pixel MSE over each player's 239-frame forecast window, while SSIM
   and LPIPS average the forecast frames. These metrics are averaged first across players within
   each episode and then equally across episodes. FID pools all forecast frames, and FVD pools I3D
   features of 16-frame clips.</p>
+    </div>
+  </div>
 
   <h3 id="comparison">Comparison with multiplayer world models</h3>
   <div class="tabs" data-target="compare">
