@@ -59,7 +59,7 @@
   <p class="caption">12&nbsp;s rollouts, both four-step: Gamma-World (Distilled), which has no
   panoramic output, and PAWA (Distilled) with its panoramas below. Episodes were checked against the
   reference for co-players in view and for no obvious generation inconsistency, so they are
-  curated rather than representative. Episode A is the case of the paper's Figure 1 and two-player comparison figure; D is a development
+  curated rather than representative. Episode A is the episode of paper Figures 1 and 4; D is a development
   episode, and E comes from the low-motion tier.</p>
 </section>
 
@@ -124,6 +124,10 @@
 
 <section id="experiments">
   <h2>Experiments</h2>
+  <p>Each block below starts with a figure from the paper and continues with the full, synchronized
+  12&nbsp;s videos behind it: first the episode shown in the figure, then further episodes. In every
+  video the reference comes last.</p>
+
   <div class="stats">
     <div class="stat"><span class="value">120.1</span><span class="vs">vs 267.1</span><span class="label">Two-player POV FVD, PAWA (Causal) vs the strongest baseline</span></div>
     <div class="stat"><span class="value">0.223</span><span class="vs">20.41 dB</span><span class="label">Panorama LPIPS and PSNR, predicted jointly with the POV</span></div>
@@ -131,269 +135,133 @@
     <div class="stat"><span class="value">73%</span><span class="vs">vs 6% chance</span><span class="label">Players whose own actions best explain their stream at 16 players</span></div>
   </div>
 
-  <div class="setup">
-    <div class="setup-item">
-      <h4>Models and baselines</h4>
-      <p>We evaluate PAWA (Causal), sampled with 35 steps, and PAWA
-  (Distilled), sampled with four steps per causal block. The baselines are the bidirectional,
-  causal and distilled variants of Gamma-World, Solaris, and MultiWorld, which runs its official
-  50-step autoregressive sampler with Minecraft controls mapped to its action space. No prior multiplayer world model accepts panoramas, and the baselines thus receive only the initial POV observations. PAWA also receives the initial panoramas, yet surpasses every baseline even when its POV stream ignores them (Table 3).</p>
-    </div>
-    <div class="setup-item">
-      <h4>Protocol</h4>
-      <p>The main comparison uses 30 two-player interaction episodes of 12 seconds at
-  20&nbsp;Hz, and separate sets of 12 episodes cover four, eight and sixteen players. All
-  evaluation episodes are absent from the final training split.</p>
-    </div>
-    <div class="setup-item">
-      <h4>Metrics</h4>
-      <p>PSNR uses pixel MSE over each player's 239-frame forecast window, while SSIM
-  and LPIPS average the forecast frames. These metrics are averaged first across players within
-  each episode and then equally across episodes. FID pools all forecast frames, and FVD pools I3D
-  features of 16-frame clips.</p>
-    </div>
-  </div>
-
-  <h3 id="comparison">Comparison with multiplayer world models</h3>
+  <h3 id="comparison">Two-player comparison</h3>
+  <figure class="paper-fig">
+    <img src="static/img/rollout-comparison.jpg" alt="Paper Figure 4: synchronized two-player forecasts">
+    <figcaption><b>Paper Figure 4. Synchronized two-player forecasts.</b> Reference denotes the recorded continuation, and POV and panorama rows share time columns. Compare the co-player in each POV with the one in the Reference row. MultiWorld uses 50 denoising steps per block and the other models use four.</figcaption>
+  </figure>
+  <p class="videos-label">Videos</p>
   <div class="tabs" data-target="compare">
-    <button data-src="static/videos/compare/tw16-v7_covis_shared_column.mp4" class="active">Episode A</button>
+    <button data-src="static/videos/compare/tw16-v7_covis_shared_column.mp4" class="active">A &middot; Figure 4</button>
     <button data-src="static/videos/compare/tw18-duet_screen_peek.mp4">Episode B</button>
     <button data-src="static/videos/compare/ez03-stereo_parallel_rail.mp4">Episode C</button>
     <button data-src="static/videos/compare/cv04-circuit_bearing_ladder.mp4">Episode D</button>
     <button data-src="static/videos/compare/ez05-occl_wade_sightline.mp4">Episode E</button>
   </div>
   <video id="compare" class="wide" src="static/videos/compare/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-  <p class="caption">All models on the same episode, synchronized; the reference closes the grid.
-  Episodes A&ndash;E are those above. Models keep their native resolution and
-  preprocessing.</p>
-  <p>In the two-player results of Table 1, PAWA (Causal) achieves the best POV scores on four of
-  the five metrics and PAWA (Distilled) the best FID, and both variants thus surpass every baseline
-  on every POV metric. Against the strongest baseline, Gamma-World (Bidirectional), PAWA (Causal)
-  lowers POV FVD from 267.1 to 120.1 and LPIPS from 0.567 to 0.421, and with the same four-step
-  budget as Gamma-World (Distilled), PAWA (Distilled) reaches POV FVD 138.1 against 279.7. The
-  panoramic predictions reach LPIPS 0.223 and 20.41&nbsp;dB PSNR. Episode A, the case of the
-  paper's two-player figure, shows the difference qualitatively: Gamma-World (Distilled) replaces
-  the co-player of Player&nbsp;1 with a differently dressed character and loses the co-player of
-  Player&nbsp;2 after 4&nbsp;s, Solaris drops the co-player of Player&nbsp;2, and MultiWorld stalls
-  after 4&nbsp;s with the co-player of Player&nbsp;1 lost. PAWA keeps both co-players in view with a
-  consistent appearance throughout the 12-second rollout. The advantage persists with four players,
-  where PAWA (Causal) reduces POV FVD from 323.6 for the best Gamma-World variant to 138.0.
-  Co-players re-entering a view after at least one second outside it reach LPIPS 0.58 against 0.65
-  for the best baseline, and the panorama forecasts co-players outside the POV as reliably as those
-  inside it. Figure 4 shows two such re-entries, where PAWA brings the co-player back while the
-  baselines lose it or keep it in view throughout.</p>
-  <figure>
-    <img src="static/img/reentry-examples.jpg" alt="A co-player leaving and re-entering the view: Reference, Solaris, Gamma-World and PAWA">
-    <figcaption><b>Figure 4. A co-player leaving and re-entering the view.</b> In (a) the co-player
-    walks around behind the player, and in (b) it steps out to the side and returns. Green boxes mark
-    the co-player where it appears correctly, red boxes mark a co-player kept in view while it should
-    be hidden or a wrong character, and dashed red boxes mark where the reference shows a co-player
-    that the model has lost. Solaris and Gamma-World keep the co-player in view, replace it or lose
-    it at the return, whereas the panorama of PAWA (Distilled) tracks the co-player outside the POV
-    and its POV shows the co-player again after the return.</figcaption>
-  </figure>
-  <div class="table-wrap">
-  <table>
-    <caption><b>Table 1.</b> Two-player interaction tier with 30 episodes and 239 forecast frames
-    per player. Baselines support only POV input, and PAWA additionally receives the initial
-    panoramas. <b>Bold</b> and <u>underline</u> mark the best and second best within each stream.</caption>
-    <thead><tr><th>Model</th><th>Stream</th><th>FVD&darr;</th><th>FID&darr;</th><th>LPIPS&darr;</th><th>PSNR&uarr;</th><th>SSIM&uarr;</th></tr></thead>
-    <tbody>
-      <tr><td>Gamma-World (Bidirectional)</td><td>POV</td><td>267.1</td><td>56.63</td><td>0.567</td><td>13.08</td><td>0.478</td></tr>
-      <tr><td>Gamma-World (Causal)</td><td>POV</td><td>306.7</td><td>52.00</td><td>0.606</td><td>12.46</td><td>0.451</td></tr>
-      <tr><td>Gamma-World (Distilled)</td><td>POV</td><td>279.7</td><td>58.36</td><td>0.584</td><td>11.83</td><td>0.431</td></tr>
-      <tr><td>Solaris</td><td>POV</td><td>614.9</td><td>77.31</td><td>0.634</td><td>10.42</td><td>0.447</td></tr>
-      <tr><td>MultiWorld</td><td>POV</td><td>771.2</td><td>186.06</td><td>0.667</td><td>11.76</td><td>0.395</td></tr>
-      <tr class="ours"><td>PAWA (Causal)</td><td>POV</td><td><b>120.1</b></td><td><u>30.80</u></td><td><b>0.421</b></td><td><b>16.86</b></td><td><b>0.562</b></td></tr>
-      <tr class="ours"><td>PAWA (Distilled)</td><td>POV</td><td><u>138.1</u></td><td><b>28.40</b></td><td><u>0.465</u></td><td><u>15.38</u></td><td><u>0.516</u></td></tr>
-      <tr class="ours sep"><td>PAWA (Causal)</td><td>Panorama</td><td><b>88.0</b></td><td><b>26.53</b></td><td><b>0.223</b></td><td><b>20.41</b></td><td><b>0.643</b></td></tr>
-      <tr class="ours"><td>PAWA (Distilled)</td><td>Panorama</td><td><u>98.1</u></td><td><u>28.26</u></td><td><u>0.243</u></td><td><u>19.77</u></td><td><u>0.617</u></td></tr>
-    </tbody>
-  </table>
-  </div>
-  <details class="table-wrap">
-    <summary>Low-motion tier (12 episodes)</summary>
-  <table>
-    <caption>Conditions and metrics follow Table 1. Pooled distances must not be compared with the
-    interaction tier. The paper also reports a 4-step causal control and MAE, omitted here.</caption>
-    <thead><tr><th>Model</th><th>Stream</th><th>FVD&darr;</th><th>FID&darr;</th><th>LPIPS&darr;</th><th>PSNR&uarr;</th><th>SSIM&uarr;</th></tr></thead>
-    <tbody>
-      <tr><td>Gamma-World (Bidirectional)</td><td>POV</td><td>333.4</td><td>67.25</td><td>0.557</td><td>12.87</td><td>0.453</td></tr>
-      <tr><td>Gamma-World (Causal)</td><td>POV</td><td>323.7</td><td>70.16</td><td>0.572</td><td>13.16</td><td>0.435</td></tr>
-      <tr><td>Gamma-World (Distilled)</td><td>POV</td><td>340.1</td><td>69.14</td><td>0.551</td><td>12.98</td><td>0.416</td></tr>
-      <tr><td>Solaris</td><td>POV</td><td>482.7</td><td>79.50</td><td>0.593</td><td>11.49</td><td>0.429</td></tr>
-      <tr><td>MultiWorld</td><td>POV</td><td>715.8</td><td>185.33</td><td>0.642</td><td>12.68</td><td>0.381</td></tr>
-      <tr class="ours"><td>PAWA (Causal)</td><td>POV</td><td>157.0</td><td>41.61</td><td>0.380</td><td>16.95</td><td>0.546</td></tr>
-      <tr class="ours"><td>PAWA (Distilled)</td><td>POV</td><td>175.0</td><td>46.18</td><td>0.437</td><td>15.80</td><td>0.502</td></tr>
-      <tr class="ours sep"><td>PAWA (Causal)</td><td>Panorama</td><td>158.8</td><td>35.91</td><td>0.209</td><td>20.75</td><td>0.653</td></tr>
-      <tr class="ours"><td>PAWA (Distilled)</td><td>Panorama</td><td>166.5</td><td>37.72</td><td>0.226</td><td>20.08</td><td>0.623</td></tr>
-    </tbody>
-  </table>
-  </details>
-  <details class="table-wrap">
-    <summary>Co-player re-entry (LPIPS)</summary>
-  <table>
-    <caption>Co-player LPIPS in the POV over the 10 frames after a co-player re-enters a player's
-    view, having been outside it for at least 20 frames. Static repeats the conditioning frame. The
-    last column is the paired change of PAWA (Distilled) relative to the best baseline with 95%
-    episode-bootstrap intervals.</caption>
-    <thead><tr><th>Players</th><th>Events</th><th>PAWA</th><th>Best baseline</th><th>Static</th><th>PAWA &minus; best</th></tr></thead>
-    <tbody>
-      <tr><td>2</td><td>48</td><td>0.582</td><td>0.654</td><td>0.635</td><td>&minus;0.071 [&minus;0.116, &minus;0.023]</td></tr>
-      <tr><td>4</td><td>111</td><td>0.603</td><td>0.649</td><td>0.647</td><td>&minus;0.046 [&minus;0.076, &minus;0.018]</td></tr>
-      <tr><td>8</td><td>505</td><td>0.649</td><td>0.710</td><td>0.688</td><td>&minus;0.061 [&minus;0.081, &minus;0.040]</td></tr>
-    </tbody>
-  </table>
-  </details>
+  <p class="caption">All models on the same episode, synchronized. Episode A is the episode of Figure 4;
+  B&ndash;E are further episodes chosen for co-players in view and no obvious generation inconsistency
+  (D is a development episode; C and E are low-motion). Models keep their native resolution and
+  preprocessing, and the panorama tile shows PAWA above the reference.</p>
 
-  <h3 id="population">Scaling the player population</h3>
-  <p>The released Gamma-World configuration provides four simplex player codes, whereas the
-  quadratic-phase codebook of PAWA assigns a distinct identity to every player of larger sessions.
-  Extending the simplex player encoding to eight codes lets Gamma-World run with eight players, but
-  on the same pool its bidirectional variant collapses to POV FVD 1707.7 and its best variant
-  reaches 267.1, against 141.3 for PAWA (Distilled) and 111.5 for PAWA (Causal), which also lowers
-  LPIPS from 0.586 to 0.458. With sixteen players, which only PAWA supports among the evaluated
-  models, the distilled model obtains POV FVD 116.7. Scenarios and pool sizes differ across
-  populations, and comparisons are therefore made within each population. Each stream also stays
-  bound to its own actions, since at sixteen players the own actions of 73% of the players best
-  explain the rotation of their stream, against 6% by chance.</p>
+  <h3 id="reentry">Co-player re-entry</h3>
+  <figure class="paper-fig">
+    <img src="static/img/reentry-examples.jpg" alt="Paper Figure 5: a co-player leaving and re-entering the view">
+    <figcaption><b>Paper Figure 5. A co-player leaving and re-entering the view.</b> In (a) the co-player walks around behind the player, and in (b) it steps out to the side and returns. Green boxes mark a correct co-player, red boxes a co-player that should be hidden or a wrong character, and dashed red boxes a co-player the model has lost.</figcaption>
+  </figure>
+  <p class="videos-label">Videos</p>
+  <div class="tabs" data-target="reentry">
+    <button data-src="static/videos/reentry/walk_behind-s23-r0.mp4" class="active">(a) Walks around behind</button>
+    <button data-src="static/videos/reentry/side_pass-s37-r1.mp4">(b) Steps out to the side</button>
+  </div>
+  <video id="reentry" class="wide" src="static/videos/reentry/walk_behind-s23-r0.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
+  <p class="caption">The full rollouts of both examples in Figure 5, with the same models. The figure
+  follows the left POV of each tile (player A); its co-player B is the other player.</p>
+
+  <h3 id="population">Four to sixteen players</h3>
+  <figure class="paper-fig">
+    <img src="static/img/rollout-four-player.jpg" alt="Paper Figure 7: synchronized four-player forecasts">
+    <figcaption><b>Paper Figure 7 (appendix). Synchronized four-player forecasts.</b> Both distilled models use four steps, and the first column contains the recorded inputs of the four players.</figcaption>
+  </figure>
+  <p class="videos-label">Videos</p>
   <div class="tabs" data-target="pop">
-    <button data-src="static/videos/population/n04c11-v7_ground_revisit.mp4" class="active">4 players</button>
+    <button data-src="static/videos/population/n04c11-v7_ground_revisit.mp4" class="active">4 players &middot; Figure 7</button>
     <button data-src="static/videos/population/n08c11-split_and_reunite.mp4">8 players</button>
     <button data-src="static/videos/population/n16c07-phase_shifted_ring_patrol.mp4">16 players</button>
   </div>
   <video id="pop" class="wide" src="static/videos/population/n04c11-v7_ground_revisit.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-  <p class="caption">Every player's POV and panorama, reference last. 4 players: the paper's
-  four-player figure case, with Gamma-World (Distilled). 8 and 16 players: the episodes with the
-  fewest visible generation errors among 12, chosen by eye against the reference.</p>
-  <div class="table-wrap">
-  <table>
-    <caption><b>Table 2.</b> 12 episodes per population, all players, 239 forecast frames.
-    Scenarios and pool sizes differ between populations, so compare within a population only. At
-    eight players, Gamma-World runs with its simplex player encoding extended from four to eight
-    codes on the same pool. The paper also reports a 4-step causal control and MAE, omitted here.</caption>
-    <thead><tr><th>Players</th><th>Model</th><th>Stream</th><th>FVD&darr;</th><th>FID&darr;</th><th>LPIPS&darr;</th><th>PSNR&uarr;</th><th>SSIM&uarr;</th></tr></thead>
-    <tbody>
-      <tr><td rowspan="7">4</td><td>Gamma-World (Bidirectional)</td><td>POV</td><td>752.3</td><td>142.95</td><td>0.633</td><td>13.34</td><td>0.487</td></tr>
-      <tr><td>Gamma-World (Causal)</td><td>POV</td><td>373.0</td><td>57.02</td><td>0.587</td><td>13.06</td><td>0.465</td></tr>
-      <tr><td>Gamma-World (Distilled)</td><td>POV</td><td>323.6</td><td>56.65</td><td>0.577</td><td>12.39</td><td>0.440</td></tr>
-      <tr class="ours"><td>PAWA (Causal)</td><td>POV</td><td>138.0</td><td>33.49</td><td>0.427</td><td>16.41</td><td>0.550</td></tr>
-      <tr class="ours"><td>PAWA (Distilled)</td><td>POV</td><td>167.3</td><td>33.86</td><td>0.481</td><td>15.08</td><td>0.506</td></tr>
-      <tr class="ours"><td>PAWA (Causal)</td><td>Panorama</td><td>161.9</td><td>32.79</td><td>0.254</td><td>19.08</td><td>0.630</td></tr>
-      <tr class="ours"><td>PAWA (Distilled)</td><td>Panorama</td><td>194.1</td><td>32.94</td><td>0.264</td><td>18.67</td><td>0.619</td></tr>
-      <tr class="sep"><td rowspan="7">8</td><td>Gamma-World (Bidirectional)</td><td>POV</td><td>1707.7</td><td>213.93</td><td>0.681</td><td>12.83</td><td>0.497</td></tr>
-      <tr><td>Gamma-World (Causal)</td><td>POV</td><td>297.3</td><td>48.84</td><td>0.606</td><td>12.21</td><td>0.453</td></tr>
-      <tr><td>Gamma-World (Distilled)</td><td>POV</td><td>267.1</td><td>48.27</td><td>0.586</td><td>11.56</td><td>0.432</td></tr>
-      <tr class="ours"><td>PAWA (Causal)</td><td>POV</td><td>111.5</td><td>32.32</td><td>0.458</td><td>15.06</td><td>0.536</td></tr>
-      <tr class="ours"><td>PAWA (Distilled)</td><td>POV</td><td>141.3</td><td>28.90</td><td>0.517</td><td>13.71</td><td>0.494</td></tr>
-      <tr class="ours"><td>PAWA (Causal)</td><td>Panorama</td><td>127.9</td><td>27.42</td><td>0.294</td><td>17.31</td><td>0.591</td></tr>
-      <tr class="ours"><td>PAWA (Distilled)</td><td>Panorama</td><td>135.6</td><td>29.52</td><td>0.301</td><td>16.72</td><td>0.577</td></tr>
-      <tr class="ours sep"><td rowspan="4">16</td><td>PAWA (Causal)</td><td>POV</td><td>92.2</td><td>28.39</td><td>0.467</td><td>15.50</td><td>0.554</td></tr>
-      <tr class="ours"><td>PAWA (Distilled)</td><td>POV</td><td>116.7</td><td>23.96</td><td>0.520</td><td>14.15</td><td>0.511</td></tr>
-      <tr class="ours"><td>PAWA (Causal)</td><td>Panorama</td><td>93.6</td><td>23.65</td><td>0.333</td><td>16.87</td><td>0.570</td></tr>
-      <tr class="ours"><td>PAWA (Distilled)</td><td>Panorama</td><td>92.5</td><td>20.95</td><td>0.333</td><td>16.66</td><td>0.567</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <details class="table-wrap">
-    <summary>Action following</summary>
-  <table>
-    <caption>Top: mean absolute error in degrees per 0.5&nbsp;s window between the yaw rotation
-    estimated from the generated POV and the same estimate on the recorded video. Bottom: the
-    fraction of players whose own actions best explain the rotation of their generated stream among
-    all players, with chance in parentheses and the recorded videos as the attainable ceiling.</caption>
-    <thead><tr><th>Yaw error&darr;</th><th>2, low-motion</th><th>2, interaction</th><th>4</th><th>8</th><th>16</th></tr></thead>
-    <tbody>
-      <tr><td>Gamma-World (Bidirectional)</td><td>4.65</td><td>8.55</td><td>11.16</td><td>12.23</td><td>N/A</td></tr>
-      <tr><td>Gamma-World (Causal)</td><td>4.77</td><td>8.80</td><td>8.55</td><td>8.45</td><td>N/A</td></tr>
-      <tr><td>Gamma-World (Distilled)</td><td>3.68</td><td>8.35</td><td>7.77</td><td>8.00</td><td>N/A</td></tr>
-      <tr><td>Solaris</td><td>7.72</td><td>13.10</td><td>N/A</td><td>N/A</td><td>N/A</td></tr>
-      <tr><td>MultiWorld</td><td>6.26</td><td>13.90</td><td>N/A</td><td>N/A</td><td>N/A</td></tr>
-      <tr class="ours"><td>PAWA (Causal)</td><td><b>2.10</b></td><td><b>4.81</b></td><td><b>4.83</b></td><td><b>5.32</b></td><td><b>6.75</b></td></tr>
-      <tr class="ours"><td>PAWA (Distilled)</td><td><u>3.17</u></td><td><u>5.79</u></td><td><u>5.38</u></td><td><u>6.74</u></td><td><u>7.75</u></td></tr>
-      <tr class="sep"><th>Action binding&uarr;</th><th></th><th>2 (0.50)</th><th>4 (0.26)</th><th>8 (0.13)</th><th>16 (0.06)</th></tr>
-      <tr><td>Recorded videos</td><td></td><td>0.98</td><td>0.98</td><td>0.96</td><td>0.86</td></tr>
-      <tr class="ours"><td>PAWA (Causal)</td><td></td><td>0.95</td><td>0.98</td><td>0.92</td><td>0.83</td></tr>
-      <tr class="ours"><td>PAWA (Distilled)</td><td></td><td>0.93</td><td>0.94</td><td>0.90</td><td>0.73</td></tr>
-    </tbody>
-  </table>
-  </details>
+  <p class="caption">Every player's POV and panorama. The four-player video is the episode of Figure 7;
+  the eight- and sixteen-player episodes have the fewest visible generation errors among 12, chosen by
+  eye against the reference. Only PAWA supports sixteen players among the evaluated models.</p>
 
-  <h3 id="analysis">Analysis</h3>
-  <p><b>Ray-aligned cross-attention.</b> Disabling all seven cross-attention sites of PAWA
-  (Distilled) at inference, with fixed weights, episodes, recorded noise and sampler, raises POV FVD
-  from 138.1 to 179.0 and LPIPS from 0.465 to 0.510, while the panoramic scores change little.
-  Removing only the pano&rarr;POV direction accounts for the entire loss, and early and late sites
-  contribute comparably. The POV prediction thus draws on the panoramic context.</p>
+  <h3 id="analysis">Removing the cross-attention</h3>
+  <p>The paper disables all seven ray-aligned cross-attention sites of PAWA (Distilled) at inference,
+  with the same weights, noise and sampler (paper Table 9, below). The videos show what this does to the
+  POV stream.</p>
   <div class="tabs" data-target="abl">
     <button data-src="static/videos/ablation/tw16-v7_covis_shared_column.mp4" class="active">Episode A</button>
     <button data-src="static/videos/ablation/tw18-duet_screen_peek.mp4">Episode B</button>
   </div>
   <video id="abl" class="wide" src="static/videos/ablation/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-  <p class="caption">PAWA (Distilled) with and without its cross-attention sites, then the
-  reference. Letters match the comparison above; the intervention was run on the interaction
-  tier, which contains A and B.</p>
-  <div class="table-wrap">
-  <table>
-    <caption><b>Table 3.</b> Inference-time removal of the seven cross-attention sites from PAWA
-    (Distilled): same final checkpoint, 30 interaction episodes, recorded noise, seed 1 and
-    four-step sampler, with no retraining. Each stream pools 14,340 forecast frames for FID and 840
-    clips for FVD.</caption>
-    <thead><tr><th>Stream</th><th>Cross-attention sites</th><th>FVD&darr;</th><th>FID&darr;</th><th>LPIPS&darr;</th><th>PSNR&uarr;</th><th>SSIM&uarr;</th></tr></thead>
-    <tbody>
-      <tr class="ours"><td>POV</td><td>Enabled</td><td><b>138.1</b></td><td><b>28.40</b></td><td><b>0.4648</b></td><td><b>15.382</b></td><td><b>0.5157</b></td></tr>
-      <tr><td>POV</td><td>Disabled</td><td>179.0</td><td>37.71</td><td>0.5096</td><td>14.749</td><td>0.5094</td></tr>
-      <tr class="ours sep"><td>Panorama</td><td>Enabled</td><td><b>98.1</b></td><td><b>28.26</b></td><td><b>0.2425</b></td><td><b>19.765</b></td><td><b>0.6172</b></td></tr>
-      <tr><td>Panorama</td><td>Disabled</td><td>104.0</td><td>28.42</td><td>0.2444</td><td>19.645</td><td>0.6142</td></tr>
-    </tbody>
-  </table>
-  </div>
+  <p class="caption">PAWA (Distilled) with and without its cross-attention sites, then the reference.
+  Letters match the two-player comparison.</p>
+
   <details class="table-wrap">
-    <summary>Removing each cross-attention direction and site</summary>
-  <table class="wide-num">
-    <caption>All arms share one code snapshot, the checkpoint, recorded noise, seed 1 and the
-    four-step sampler. The full arm differs slightly from the archived run of Table 3, so compare
-    within this table. Pano&rarr;POV denotes POV queries reading panoramic keys. Early and late
-    denote sites after blocks 3, 7, 11 and 19, 23, 27.</caption>
-    <thead><tr><th>Removed</th><th>POV FVD&darr;</th><th>POV FID&darr;</th><th>POV LPIPS&darr;</th><th>POV PSNR&uarr;</th><th>POV SSIM&uarr;</th><th>Pano FVD&darr;</th><th>Pano LPIPS&darr;</th></tr></thead>
-    <tbody>
-      <tr class="ours"><td>None</td><td>135.2</td><td>27.65</td><td>0.458</td><td>15.72</td><td>0.523</td><td>98.2</td><td>0.243</td></tr>
-      <tr><td>All sites</td><td>171.2</td><td>37.69</td><td>0.510</td><td>14.63</td><td>0.504</td><td>106.2</td><td>0.245</td></tr>
-      <tr><td>Pano&rarr;POV only</td><td>171.2</td><td>37.69</td><td>0.510</td><td>14.63</td><td>0.504</td><td>99.4</td><td>0.242</td></tr>
-      <tr><td>POV&rarr;pano only</td><td>139.0</td><td>28.51</td><td>0.466</td><td>15.39</td><td>0.515</td><td>106.2</td><td>0.245</td></tr>
-      <tr><td>Early sites</td><td>145.5</td><td>31.52</td><td>0.481</td><td>15.14</td><td>0.512</td><td>95.3</td><td>0.242</td></tr>
-      <tr><td>Late sites</td><td>142.0</td><td>30.26</td><td>0.483</td><td>15.17</td><td>0.513</td><td>104.2</td><td>0.244</td></tr>
-    </tbody>
-  </table>
+    <summary>Quantitative results from the paper (Tables 1, 5&ndash;6 and 9)</summary>
+    <div class="table-wrap">
+    <table>
+      <caption><b>Paper Table 1.</b> Two-player interaction tier with 30 episodes and 239 forecast frames
+      per player. Baselines support only POV input, and PAWA additionally receives the initial
+      panoramas. <b>Bold</b> and <u>underline</u> mark the best and second best within each stream.</caption>
+      <thead><tr><th>Model</th><th>Stream</th><th>FVD&darr;</th><th>FID&darr;</th><th>LPIPS&darr;</th><th>PSNR&uarr;</th><th>SSIM&uarr;</th></tr></thead>
+      <tbody>
+        <tr><td>Gamma-World (Bidirectional)</td><td>POV</td><td>267.1</td><td>56.63</td><td>0.567</td><td>13.08</td><td>0.478</td></tr>
+        <tr><td>Gamma-World (Causal)</td><td>POV</td><td>306.7</td><td>52.00</td><td>0.606</td><td>12.46</td><td>0.451</td></tr>
+        <tr><td>Gamma-World (Distilled)</td><td>POV</td><td>279.7</td><td>58.36</td><td>0.584</td><td>11.83</td><td>0.431</td></tr>
+        <tr><td>Solaris</td><td>POV</td><td>614.9</td><td>77.31</td><td>0.634</td><td>10.42</td><td>0.447</td></tr>
+        <tr><td>MultiWorld</td><td>POV</td><td>771.2</td><td>186.06</td><td>0.667</td><td>11.76</td><td>0.395</td></tr>
+        <tr class="ours"><td>PAWA (Causal)</td><td>POV</td><td><b>120.1</b></td><td><u>30.80</u></td><td><b>0.421</b></td><td><b>16.86</b></td><td><b>0.562</b></td></tr>
+        <tr class="ours"><td>PAWA (Distilled)</td><td>POV</td><td><u>138.1</u></td><td><b>28.40</b></td><td><u>0.465</u></td><td><u>15.38</u></td><td><u>0.516</u></td></tr>
+        <tr class="ours sep"><td>PAWA (Causal)</td><td>Panorama</td><td><b>88.0</b></td><td><b>26.53</b></td><td><b>0.223</b></td><td><b>20.41</b></td><td><b>0.643</b></td></tr>
+        <tr class="ours"><td>PAWA (Distilled)</td><td>Panorama</td><td><u>98.1</u></td><td><u>28.26</u></td><td><u>0.243</u></td><td><u>19.77</u></td><td><u>0.617</u></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="table-wrap">
+    <table>
+      <caption><b>Paper Tables 5&ndash;6.</b> 12 episodes per population, all players, 239 forecast frames.
+      Scenarios and pool sizes differ between populations, so compare within a population only. At
+      eight players, Gamma-World runs with its simplex player encoding extended from four to eight
+      codes on the same pool. The paper also reports a 4-step causal control and MAE, omitted here.</caption>
+      <thead><tr><th>Players</th><th>Model</th><th>Stream</th><th>FVD&darr;</th><th>FID&darr;</th><th>LPIPS&darr;</th><th>PSNR&uarr;</th><th>SSIM&uarr;</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="7">4</td><td>Gamma-World (Bidirectional)</td><td>POV</td><td>752.3</td><td>142.95</td><td>0.633</td><td>13.34</td><td>0.487</td></tr>
+        <tr><td>Gamma-World (Causal)</td><td>POV</td><td>373.0</td><td>57.02</td><td>0.587</td><td>13.06</td><td>0.465</td></tr>
+        <tr><td>Gamma-World (Distilled)</td><td>POV</td><td>323.6</td><td>56.65</td><td>0.577</td><td>12.39</td><td>0.440</td></tr>
+        <tr class="ours"><td>PAWA (Causal)</td><td>POV</td><td>138.0</td><td>33.49</td><td>0.427</td><td>16.41</td><td>0.550</td></tr>
+        <tr class="ours"><td>PAWA (Distilled)</td><td>POV</td><td>167.3</td><td>33.86</td><td>0.481</td><td>15.08</td><td>0.506</td></tr>
+        <tr class="ours"><td>PAWA (Causal)</td><td>Panorama</td><td>161.9</td><td>32.79</td><td>0.254</td><td>19.08</td><td>0.630</td></tr>
+        <tr class="ours"><td>PAWA (Distilled)</td><td>Panorama</td><td>194.1</td><td>32.94</td><td>0.264</td><td>18.67</td><td>0.619</td></tr>
+        <tr class="sep"><td rowspan="7">8</td><td>Gamma-World (Bidirectional)</td><td>POV</td><td>1707.7</td><td>213.93</td><td>0.681</td><td>12.83</td><td>0.497</td></tr>
+        <tr><td>Gamma-World (Causal)</td><td>POV</td><td>297.3</td><td>48.84</td><td>0.606</td><td>12.21</td><td>0.453</td></tr>
+        <tr><td>Gamma-World (Distilled)</td><td>POV</td><td>267.1</td><td>48.27</td><td>0.586</td><td>11.56</td><td>0.432</td></tr>
+        <tr class="ours"><td>PAWA (Causal)</td><td>POV</td><td>111.5</td><td>32.32</td><td>0.458</td><td>15.06</td><td>0.536</td></tr>
+        <tr class="ours"><td>PAWA (Distilled)</td><td>POV</td><td>141.3</td><td>28.90</td><td>0.517</td><td>13.71</td><td>0.494</td></tr>
+        <tr class="ours"><td>PAWA (Causal)</td><td>Panorama</td><td>127.9</td><td>27.42</td><td>0.294</td><td>17.31</td><td>0.591</td></tr>
+        <tr class="ours"><td>PAWA (Distilled)</td><td>Panorama</td><td>135.6</td><td>29.52</td><td>0.301</td><td>16.72</td><td>0.577</td></tr>
+        <tr class="ours sep"><td rowspan="4">16</td><td>PAWA (Causal)</td><td>POV</td><td>92.2</td><td>28.39</td><td>0.467</td><td>15.50</td><td>0.554</td></tr>
+        <tr class="ours"><td>PAWA (Distilled)</td><td>POV</td><td>116.7</td><td>23.96</td><td>0.520</td><td>14.15</td><td>0.511</td></tr>
+        <tr class="ours"><td>PAWA (Causal)</td><td>Panorama</td><td>93.6</td><td>23.65</td><td>0.333</td><td>16.87</td><td>0.570</td></tr>
+        <tr class="ours"><td>PAWA (Distilled)</td><td>Panorama</td><td>92.5</td><td>20.95</td><td>0.333</td><td>16.66</td><td>0.567</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="table-wrap">
+    <table>
+      <caption><b>Paper Table 9.</b> Inference-time removal of the seven cross-attention sites from PAWA
+      (Distilled): same final checkpoint, 30 interaction episodes, recorded noise, seed 1 and
+      four-step sampler, with no retraining. Each stream pools 14,340 forecast frames for FID and 840
+      clips for FVD.</caption>
+      <thead><tr><th>Stream</th><th>Cross-attention sites</th><th>FVD&darr;</th><th>FID&darr;</th><th>LPIPS&darr;</th><th>PSNR&uarr;</th><th>SSIM&uarr;</th></tr></thead>
+      <tbody>
+        <tr class="ours"><td>POV</td><td>Enabled</td><td><b>138.1</b></td><td><b>28.40</b></td><td><b>0.4648</b></td><td><b>15.382</b></td><td><b>0.5157</b></td></tr>
+        <tr><td>POV</td><td>Disabled</td><td>179.0</td><td>37.71</td><td>0.5096</td><td>14.749</td><td>0.5094</td></tr>
+        <tr class="ours sep"><td>Panorama</td><td>Enabled</td><td><b>98.1</b></td><td><b>28.26</b></td><td><b>0.2425</b></td><td><b>19.765</b></td><td><b>0.6172</b></td></tr>
+        <tr><td>Panorama</td><td>Disabled</td><td>104.0</td><td>28.42</td><td>0.2444</td><td>19.645</td><td>0.6142</td></tr>
+      </tbody>
+    </table>
+    </div>
   </details>
-  <p><b>Learned ray alignment.</b> At the late cross-attention sites, POV queries place up to 46%
-  of their attention on the panorama inside their own frustum, against 10% for uniform attention,
-  and the most attended key lies a median of 7&deg; from the query ray. Re-initialized sites stay
-  at chance under the same ray encoding, and the cross-attention therefore learns to connect
-  matching directions.</p>
-  <div class="table-wrap">
-  <table>
-    <caption><b>Table 4.</b> Geometry of POV&rarr;panorama attention, averaged over heads (8 episodes,
-    93 frames). For each POV query: the expected angle between its ray and the attended panoramic
-    key rays, the attention mass inside the POV frustum, the mass within 15&deg; of the query ray,
-    and the median angle to the most attended key. Chance is uniform attention over the panorama.
-    The control re-initializes the cross-attention sites of the distilled model and keeps its ray
-    encoding. Sites after blocks 7 and 11 stay at chance in both models and are omitted.</caption>
-    <thead><tr><th>Model</th><th>Site</th><th>Angle&darr;</th><th>Frustum mass&uarr;</th><th>Mass within 15&deg;&uarr;</th><th>Argmax error&darr;</th></tr></thead>
-    <tbody>
-      <tr class="ours"><td>PAWA (Distilled)</td><td>3</td><td>68&deg;</td><td>0.27</td><td>0.087</td><td>22&deg;</td></tr>
-      <tr class="ours"><td></td><td>19</td><td>51&deg;</td><td>0.43</td><td>0.25</td><td>9&deg;</td></tr>
-      <tr class="ours"><td></td><td>23</td><td>50&deg;</td><td>0.46</td><td>0.29</td><td>7&deg;</td></tr>
-      <tr class="ours"><td></td><td>27</td><td>65&deg;</td><td>0.28</td><td>0.16</td><td>24&deg;</td></tr>
-      <tr class="ours sep"><td>PAWA (Causal)</td><td>3</td><td>74&deg;</td><td>0.22</td><td>0.063</td><td>31&deg;</td></tr>
-      <tr class="ours"><td></td><td>19</td><td>47&deg;</td><td>0.47</td><td>0.29</td><td>8&deg;</td></tr>
-      <tr class="ours"><td></td><td>23</td><td>38&deg;</td><td>0.57</td><td>0.43</td><td>5&deg;</td></tr>
-      <tr class="ours"><td></td><td>27</td><td>55&deg;</td><td>0.36</td><td>0.25</td><td>12&deg;</td></tr>
-      <tr class="sep"><td>Control, re-initialized sites</td><td>all</td><td>90&deg;</td><td>0.10</td><td>0.011</td><td>&asymp;90&deg;</td></tr>
-      <tr><td>Chance</td><td>all</td><td>90&deg;</td><td>0.10</td><td>0.012</td><td>&asymp;90&deg;</td></tr>
-    </tbody>
-  </table>
-  </div>
 </section>
 
 </main>

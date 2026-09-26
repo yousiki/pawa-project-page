@@ -196,3 +196,12 @@ footer {
   section#tldr { padding: 24px 20px; }
   .grid2 { grid-template-columns: 1fr; }
 }
+
+/* Paper figure followed by its videos */
+figure.paper-fig { max-width: 1000px; padding: 20px 20px 16px; background: var(--soft); border-radius: 14px; margin-bottom: 20px; }
+figure.paper-fig img { border-radius: 6px; background: #fff; }
+.videos-label {
+  max-width: none; margin: 0 0 4px; text-align: center; color: var(--muted);
+  font: 600 .75rem var(--sans); letter-spacing: .14em; text-transform: uppercase;
+}
+details.table-wrap > .table-wrap { margin-top: 12px; }
