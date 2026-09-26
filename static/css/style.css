@@ -76,7 +76,7 @@ a.btn:hover { background: #dfe8fb; }
 /* Layout: text at reading width, media and tables wider */
 main { padding: 0 16px 96px; counter-reset: sec; }
 section { max-width: var(--wide); margin: 0 auto; padding-top: 88px; }
-section > p, section > h2, section > h3, section > .caption, section#tldr, section#abstract {
+section > p, section > h2, section > h3, section#tldr, section#abstract {
   max-width: var(--measure); margin-left: auto; margin-right: auto;
 }
 section > .table-wrap, section > .stats, section > .setup { max-width: 920px; margin-left: auto; margin-right: auto; }
@@ -108,8 +108,9 @@ section#abstract p { font-size: 1.04rem; line-height: 1.75; }
 /* Figures, captions, videos */
 figure { margin: 0 auto 32px; }
 figure img, figure video { width: 100%; border-radius: 10px; }
+/* Captions take the exact width of the figure or video they describe. */
 figcaption, .caption {
-  max-width: var(--measure); margin: 12px auto 0; color: var(--muted);
+  margin: 12px 0 0; color: var(--muted);
   font: .85rem/1.6 var(--sans);
 }
 figcaption b { color: var(--ink); }
@@ -118,7 +119,7 @@ video.wide, .grid2 video, figure > video {
   box-shadow: 0 1px 2px rgba(11, 21, 48, .06), 0 8px 24px rgba(11, 21, 48, .08);
 }
 section > video.wide { margin: 0 auto; }
-section > .caption { margin-bottom: 36px; }
+section > p.caption { max-width: none; margin: 12px 0 36px; }
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 0 auto 32px; }
 .grid2 figure { margin: 0; }
 #dataset figure, #dataset .grid2, #model figure { max-width: 1000px; }
