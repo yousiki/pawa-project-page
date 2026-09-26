@@ -6,10 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>PAWA: Panoramic Multiplayer World Modeling</title>
 <meta name="description" content="Anonymous project page for an ICLR 2027 submission: action-conditioned panoramic multiplayer world modeling in Minecraft.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<!-- Self-contained: no external requests, so viewing the page cannot reveal a reviewer. -->
 <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
@@ -32,8 +29,8 @@
     <p class="venue">Paper under double-blind review &middot; ICLR 2027 submission</p>
     <div class="buttons">
       <span class="btn disabled" title="Available through the review system">Paper</span>
-      <span class="btn disabled" title="Released after the review period">Code &middot; to be released</span>
-      <span class="btn disabled" title="Released after the review period">Dataset &middot; to be released</span>
+      <span class="btn disabled" title="Planned for public release">Code &middot; to be released</span>
+      <span class="btn disabled" title="Planned for public release">Dataset &middot; to be released</span>
       <a class="btn" href="#samples">Videos</a>
     </div>
   </div>
@@ -44,9 +41,13 @@
 <section id="samples">
   <figure>
     <img src="static/img/teaser.png" alt="Two players' POV forecasts and forecast panoramas">
-    <figcaption><b>Figure 1.</b> From each player's initial POV and panorama and the actions of both
-    players, PAWA jointly forecasts every player's POV and world-stabilized panoramic video.
-    Green-bordered frames are inputs; all others are forecasts of the distilled model.</figcaption>
+    <figcaption><b>Figure 1. Panoramic multiplayer world modeling with PAWA.</b> From each
+    player's initial POV and panoramic observations and the actions of both players, PAWA jointly
+    forecasts every player's POV video and world-stabilized panoramic video. Apart from the
+    green-bordered inputs, all frames are forecasts of the distilled model. The dashed outline
+    projects the dashed POV frame at 2&nbsp;s onto the panorama at the same time. Circles mark the
+    co-player, which appears in the matching direction in the POV and the panorama. Panoramas are
+    cropped to &plusmn;55&deg; latitude for display.</figcaption>
   </figure>
   <div class="tabs" data-target="teaser">
     <button data-src="static/videos/pawa/tw16-v7_covis_shared_column.mp4" class="active">Episode A</button>
@@ -56,56 +57,60 @@
     <button data-src="static/videos/pawa/ez05-occl_wade_sightline.mp4">Episode E</button>
   </div>
   <video id="teaser" class="wide" src="static/videos/pawa/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-  <p class="caption">12&nbsp;s rollouts, both four-step: Gamma-World (Distilled), which has no
-  panoramic output, and PAWA (Distilled) with its panoramas below. Episodes were checked against the
-  reference for co-players in view and for no obvious generation inconsistency, so they are
-  curated rather than representative. Episode A is the episode of paper Figures 1 and 4; D is a development
-  episode, and E comes from the low-motion tier.</p>
+  <p class="caption">Twelve-second rollouts of Gamma-World (Distilled), which has no panoramic
+  output, and PAWA (Distilled) with its panoramas below, both sampled with four steps. The episodes
+  were selected by comparison with the reference for visible co-players and the absence of evident
+  generation errors, and they are therefore curated rather than representative. Episode A is the
+  episode of Figures 1 and 4 of the paper, Episode D is a development episode, and Episode E
+  belongs to the low-motion tier.</p>
 </section>
 
 <section id="tldr" class="tldr">
-  <h2>TL;DR</h2>
+  <h2>Summary</h2>
   <ul>
-    <li><b>Dataset:</b> synchronized POV and world-stabilized panoramic videos with aligned actions
-    for interacting Minecraft players, from a CPU-capture / GPU-render pipeline that scales beyond
-    64 players.</li>
-    <li><b>Model:</b> dual POV and panorama towers joined by ray-aligned cross-attention, with
-    quadratic-phase player codes that give <i>m</i><sup>2</sup> identities instead of
-    <i>m</i>+1.</li>
-    <li><b>Results:</b> better POV prediction than Gamma-World, Solaris and MultiWorld, plus
-    high-fidelity panoramas, from 2 to 16 players.</li>
+    <li><b>Dataset.</b> Synchronized POV and world-stabilized panoramic videos with aligned actions
+    of interacting Minecraft players, collected by a pipeline that decouples CPU gameplay capture
+    from GPU rendering and scales beyond 64 simultaneous players.</li>
+    <li><b>Model.</b> POV and panorama towers coupled by ray-aligned cross-attention, with a
+    quadratic-phase player encoding that provides <i>m</i><sup>2</sup> player codes instead of
+    <i>m</i>+1 in <i>m</i> phase planes for odd prime <i>m</i>.</li>
+    <li><b>Results.</b> Higher POV prediction quality than Gamma-World, Solaris and MultiWorld with two players and
+    than Gamma-World with four and eight players, together with high-fidelity panoramic predictions
+    for 2 to 16 players.</li>
   </ul>
 </section>
 
 <section id="abstract">
   <h2>Abstract</h2>
-  <p>A multiplayer world model must predict how the independent actions of several players change a shared environment, including changes outside a player's current field of view. A point-of-view (POV) video observes such changes only after they enter the camera, whereas panoramic video records the surroundings in every viewing direction and has served as an intermediate representation of the world state in recent world models. Learning this task therefore calls for synchronized POV and panoramic videos of interacting players together with their actions, yet no existing dataset provides this combination in Minecraft, an established testbed in which players act independently in a shared, modifiable 3D world. We present PAWA, a dataset and framework for action-conditioned panoramic multiplayer world modeling. The dataset pairs each player's POV video with world-stabilized panoramic video and aligned actions. Its distributed pipeline decouples CPU gameplay capture from GPU rendering, scales beyond 64 simultaneous players, and re-renders each recorded session under new observation configurations without replaying the gameplay. On this dataset, we develop a dual-tower model that jointly predicts POV and panoramic video and couples the two streams through cross-attention that aligns tokens observing the same direction in a shared world frame. We further introduce a quadratic-phase player encoding that distinguishes many more players than existing rotary codes at the same embedding dimension. Experiments show that PAWA outperforms state-of-the-art multiplayer world models in POV prediction quality while also producing high-fidelity panoramic predictions. We will release the dataset and collection pipeline to support further research on multiplayer world models.</p>
+  <p>A multiplayer world model must predict how the independent actions of several players change a shared environment, including changes outside a player's current field of view. A point-of-view (POV) video captures such changes only after they enter its field of view, whereas panoramic video records the surroundings in every viewing direction and has served as an intermediate representation of the world state in recent world models. Learning this task therefore requires synchronized POV and panoramic videos of interacting players together with their actions, yet no existing dataset provides this combination in Minecraft, an established testbed in which players act independently in a shared, modifiable 3D world. We present PAWA, a dataset and framework for action-conditioned panoramic multiplayer world modeling. The dataset pairs each player's POV video with world-stabilized panoramic video and aligned actions. Its distributed pipeline decouples CPU gameplay capture from GPU rendering, scales beyond 64 simultaneous players, and re-renders each recorded session under new observation configurations without replaying the gameplay. On this dataset, we develop a dual-tower model that jointly predicts POV and panoramic video and couples the two streams through cross-attention that aligns tokens observing the same direction in a shared world frame. We further introduce a quadratic-phase player encoding that provides many more player codes than existing rotary codes at the same embedding dimension. Experiments show that PAWA outperforms state-of-the-art multiplayer world models in POV prediction quality while also producing high-fidelity panoramic predictions. We will release the dataset and collection pipeline to support further research on multiplayer world models.</p>
 </section>
 
 <section id="dataset">
   <h2>Dataset</h2>
   <figure>
     <img src="static/img/collection-pipeline.png" alt="Data pipeline">
-    <figcaption><b>Figure 2.</b> Distributed data generation: agent-written action scripts, CPU
-    capture, offline GPU rendering, and QC/VLM review.</figcaption>
+    <figcaption><b>Figure 2. Distributed data generation.</b> Coding agents write action scripts,
+    CPU capture records sessions with more than 64 players without graphics clients, and GPU
+    workers render the replays offline. Behavioral QC and VLM review return failed scripts for
+    revision.</figcaption>
   </figure>
   <div class="grid2">
     <figure>
       <video src="static/videos/data/n64-observer.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-      <figcaption>64 players, free camera rendered after capture.</figcaption>
+      <figcaption>A session with 64 players, rendered after capture from a free observer camera.</figcaption>
     </figure>
     <figure>
       <video src="static/videos/data/n128-observer.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-      <figcaption>128 players (retained interval of an incomplete capture).</figcaption>
+      <figcaption>An excerpt of a session with 128 players, rendered from a free observer camera.</figcaption>
     </figure>
   </div>
   <figure>
     <video class="wide" src="static/videos/data/n64-pov-pano.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-    <figcaption>POV and world-stabilized panorama of one player.</figcaption>
+    <figcaption>The POV video and the world-stabilized panoramic video of one player.</figcaption>
   </figure>
   <figure>
     <video class="wide" src="static/videos/data/n64-depth.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-    <figcaption>Relative depth in both projections (not a model input).</figcaption>
+    <figcaption>Relative depth rendered in both projections. Depth is not an input to the model.</figcaption>
   </figure>
 </section>
 
@@ -113,32 +118,37 @@
   <h2>Model</h2>
   <figure>
     <img src="static/img/model-overview.png" alt="Dual-tower DiT with ray-aligned cross-attention">
-    <figcaption><b>Figure 3.</b> (a) POV and panorama towers, shared across players and coupled by
-    ray-aligned cross-attention after every four DiT blocks. (b) Tokens that share a viewing ray
-    have zero relative phase.</figcaption>
+    <figcaption><b>Figure 3. PAWA architecture.</b> (a) POV and panorama towers share weights
+    across players and are coupled by ray-aligned cross-attention at seven sites. Actions
+    <i>a<sub>p</sub></i> and appearance attributes <i>e<sub>p</sub></i> condition self-attention,
+    and the player code <i>&theta;<sub>p</sub></i> rotates Q and K. (b) Tokens that share a viewing
+    ray, shown by the POV field of view projected onto the panorama. Each direction rotates the
+    normalized Q and K by their viewing rays and adds its output through a zero-initialized
+    gate.</figcaption>
   </figure>
   <video class="wide" src="static/videos/stages/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-  <p class="caption">Episode A across PAWA configurations: the causal model at four steps, PAWA
-  (Causal) at 35 steps, PAWA (Distilled) at four, and the reference.</p>
+  <p class="caption">Episode A under three PAWA configurations, namely the causal model sampled
+  with four steps, PAWA (Causal) sampled with 35 steps and PAWA (Distilled) sampled with four
+  steps, followed by the reference.</p>
 </section>
 
 <section id="experiments">
   <h2>Experiments</h2>
-  <p>Each block below starts with a figure from the paper and continues with the full, synchronized
-  12&nbsp;s videos behind it: first the episode shown in the figure, then further episodes. In every
-  video the reference comes last.</p>
+  <p>Each of the first three blocks below begins with a figure from the paper, followed by the complete synchronized
+  twelve-second videos from which it is drawn. The episode shown in the figure comes first, followed
+  by further episodes, and the reference appears last in every video.</p>
 
   <div class="stats">
     <div class="stat"><span class="value">120.1</span><span class="vs">vs 267.1</span><span class="label">Two-player POV FVD, PAWA (Causal) vs the strongest baseline</span></div>
     <div class="stat"><span class="value">0.223</span><span class="vs">20.41 dB</span><span class="label">Panorama LPIPS and PSNR, predicted jointly with the POV</span></div>
     <div class="stat"><span class="value">111.5</span><span class="vs">vs 267.1</span><span class="label">Eight-player POV FVD, PAWA (Causal) vs the best Gamma-World variant</span></div>
-    <div class="stat"><span class="value">73%</span><span class="vs">vs 6% chance</span><span class="label">Players whose own actions best explain their stream at 16 players</span></div>
+    <div class="stat"><span class="value">73%</span><span class="vs">vs 6% chance</span><span class="label">Players whose own actions best explain their POV rotation at 16 players, PAWA (Distilled)</span></div>
   </div>
 
   <h3 id="comparison">Two-player comparison</h3>
   <figure class="paper-fig">
     <img src="static/img/rollout-comparison.jpg" alt="Paper Figure 4: synchronized two-player forecasts">
-    <figcaption><b>Paper Figure 4. Synchronized two-player forecasts.</b> Reference denotes the recorded continuation, and POV and panorama rows share time columns. Compare the co-player in each POV with the one in the Reference row. MultiWorld uses 50 denoising steps per block and the other models use four.</figcaption>
+    <figcaption><b>Paper Figure 4. Synchronized two-player forecasts.</b> Reference denotes the recorded continuation, and POV and panorama rows share time columns. The co-player in each POV can be compared with the one in the Reference row. MultiWorld uses 50 denoising steps per block and the other models use four.</figcaption>
   </figure>
   <p class="videos-label">Videos</p>
   <div class="tabs" data-target="compare">
@@ -149,10 +159,11 @@
     <button data-src="static/videos/compare/ez05-occl_wade_sightline.mp4">Episode E</button>
   </div>
   <video id="compare" class="wide" src="static/videos/compare/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-  <p class="caption">All models on the same episode, synchronized. Episode A is the episode of Figure 4;
-  B&ndash;E are further episodes chosen for co-players in view and no obvious generation inconsistency
-  (D is a development episode; C and E are low-motion). Models keep their native resolution and
-  preprocessing, and the panorama tile shows PAWA above the reference.</p>
+  <p class="caption">All models on the same episode in synchronized playback. Episode A is the
+  episode of Figure 4, and Episodes B to E are further episodes selected for visible co-players and
+  the absence of evident generation errors. Episode D is a development episode, and Episodes C and E
+  belong to the low-motion tier. Every model keeps its native resolution and preprocessing, and the
+  panorama tile shows PAWA above the reference.</p>
 
   <h3 id="reentry">Co-player re-entry</h3>
   <figure class="paper-fig">
@@ -165,8 +176,9 @@
     <button data-src="static/videos/reentry/side_pass-s37-r1.mp4">(b) Steps out to the side</button>
   </div>
   <video id="reentry" class="wide" src="static/videos/reentry/walk_behind-s23-r0.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-  <p class="caption">The full rollouts of both examples in Figure 5, with the same models. The figure
-  follows the left POV of each tile (player A); its co-player B is the other player.</p>
+  <p class="caption">The complete rollouts of both examples in Figure 5, with the same models. The
+  figure follows the left POV of each tile, which belongs to player A, and the co-player is
+  player B.</p>
 
   <h3 id="population">Four to sixteen players</h3>
   <figure class="paper-fig">
@@ -180,21 +192,22 @@
     <button data-src="static/videos/population/n16c07-phase_shifted_ring_patrol.mp4">16 players</button>
   </div>
   <video id="pop" class="wide" src="static/videos/population/n04c11-v7_ground_revisit.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-  <p class="caption">Every player's POV and panorama. The four-player video is the episode of Figure 7;
-  the eight- and sixteen-player episodes have the fewest visible generation errors among 12, chosen by
-  eye against the reference. Only PAWA supports sixteen players among the evaluated models.</p>
+  <p class="caption">The POV and panoramic videos of every player. The four-player video is the
+  episode of Figure 7. The eight- and sixteen-player episodes are those with the fewest visible
+  generation errors among 12 episodes each, selected by visual comparison with the reference. Among
+  the evaluated models, only PAWA supports sixteen players.</p>
 
   <h3 id="analysis">Removing the cross-attention</h3>
-  <p>The paper disables all seven ray-aligned cross-attention sites of PAWA (Distilled) at inference,
-  with the same weights, noise and sampler (paper Table 9, below). The videos show what this does to the
-  POV stream.</p>
+  <p>The paper disables all seven ray-aligned cross-attention sites of PAWA (Distilled) at inference
+  with the same weights, noise and sampler (Table 9 of the paper, reproduced below). The videos show
+  the resulting effect on the POV stream.</p>
   <div class="tabs" data-target="abl">
     <button data-src="static/videos/ablation/tw16-v7_covis_shared_column.mp4" class="active">Episode A</button>
     <button data-src="static/videos/ablation/tw18-duet_screen_peek.mp4">Episode B</button>
   </div>
   <video id="abl" class="wide" src="static/videos/ablation/tw16-v7_covis_shared_column.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
-  <p class="caption">PAWA (Distilled) with and without its cross-attention sites, then the reference.
-  Letters match the two-player comparison.</p>
+  <p class="caption">PAWA (Distilled) with and without its cross-attention sites, followed by the
+  reference. The episode letters match the two-player comparison.</p>
 
   <details class="table-wrap">
     <summary>Quantitative results from the paper (Tables 1, 5&ndash;6 and 9)</summary>
@@ -202,7 +215,7 @@
     <table>
       <caption><b>Paper Table 1.</b> Two-player interaction tier with 30 episodes and 239 forecast frames
       per player. Baselines support only POV input, and PAWA additionally receives the initial
-      panoramas. <b>Bold</b> and <u>underline</u> mark the best and second best within each stream.</caption>
+      panoramas. <b>Bold</b> and <u>underline</u> mark the best and second best within each stream and evaluation group.</caption>
       <thead><tr><th>Model</th><th>Stream</th><th>FVD&darr;</th><th>FID&darr;</th><th>LPIPS&darr;</th><th>PSNR&uarr;</th><th>SSIM&uarr;</th></tr></thead>
       <tbody>
         <tr><td>Gamma-World (Bidirectional)</td><td>POV</td><td>267.1</td><td>56.63</td><td>0.567</td><td>13.08</td><td>0.478</td></tr>
@@ -220,9 +233,9 @@
     <div class="table-wrap">
     <table>
       <caption><b>Paper Tables 5&ndash;6.</b> 12 episodes per population, all players, 239 forecast frames.
-      Scenarios and pool sizes differ between populations, so compare within a population only. At
+      Scenarios and pool sizes differ between populations, and comparisons are therefore made within each population. At
       eight players, Gamma-World runs with its simplex player encoding extended from four to eight
-      codes on the same pool. The paper also reports a 4-step causal control and MAE, omitted here.</caption>
+      codes on the same pool. The MAE column of the paper is omitted.</caption>
       <thead><tr><th>Players</th><th>Model</th><th>Stream</th><th>FVD&darr;</th><th>FID&darr;</th><th>LPIPS&darr;</th><th>PSNR&uarr;</th><th>SSIM&uarr;</th></tr></thead>
       <tbody>
         <tr><td rowspan="7">4</td><td>Gamma-World (Bidirectional)</td><td>POV</td><td>752.3</td><td>142.95</td><td>0.633</td><td>13.34</td><td>0.487</td></tr>
@@ -249,9 +262,8 @@
     <div class="table-wrap">
     <table>
       <caption><b>Paper Table 9.</b> Inference-time removal of the seven cross-attention sites from PAWA
-      (Distilled): same final checkpoint, 30 interaction episodes, recorded noise, seed 1 and
-      four-step sampler, with no retraining. Each stream pools 14,340 forecast frames for FID and 840
-      clips for FVD.</caption>
+      (Distilled). Both configurations use the same final distilled checkpoint, 30 two-player
+      interaction episodes, recorded noise, seed 1 and four-step sampler. No model is retrained.</caption>
       <thead><tr><th>Stream</th><th>Cross-attention sites</th><th>FVD&darr;</th><th>FID&darr;</th><th>LPIPS&darr;</th><th>PSNR&uarr;</th><th>SSIM&uarr;</th></tr></thead>
       <tbody>
         <tr class="ours"><td>POV</td><td>Enabled</td><td><b>138.1</b></td><td><b>28.40</b></td><td><b>0.4648</b></td><td><b>15.382</b></td><td><b>0.5157</b></td></tr>
@@ -268,9 +280,6 @@
 
 <footer>Anonymous project page for double-blind review. Page layout inspired by the Solaris project page.</footer>
 
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
-  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true}]})"></script>
 <script src="static/js/main.js"></script>
 </body>
 </html>
