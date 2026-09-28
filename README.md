@@ -2,7 +2,7 @@
 
 Source of <https://pawa.siki.moe>, the project page of the arXiv version of
 *PAWA: Panoramic Action-conditioned World Modeling for Multiple Agents*.
-The paper source lives on the `arxiv` branch of this repository; this `site` branch holds only the page.
+The paper source lives in [yousiki/pawa-paper](https://github.com/yousiki/pawa-paper) (`arxiv` branch for this version). This repository holds only the page; the anonymous ICLR page is on the `iclr-anonymous` branch.
 
 ## Stack
 
@@ -24,6 +24,8 @@ apps/web/            Astro app
   wrangler.jsonc     assets-only Worker bound to pawa.siki.moe
 packages/config/     shared tsconfig
 scripts/             upload-media.ts (R2), make-og.ts (social preview)
+tools/               build_website_media.py, composes the clips from the evaluation outputs
+docs/media.md        clip building, figure export and episode curation notes
 media/               local staging of the clips (git-ignored)
 ```
 
@@ -43,8 +45,8 @@ Wrangler needs `wrangler login`. The Cloudflare account is pinned in `wrangler.j
 ## Content
 
 - **arXiv link.** Set `arxivId` in `apps/web/src/data/site.ts`. This enables the arXiv and PDF buttons, the nav button, the Google Scholar `citation_pdf_url` tag and the BibTeX `journal` field. Fill `code` and `dataset` on release.
-- **Text, figures and tables** follow the `arxiv` branch: figures from `figures/*.pdf` (rasterized at 2000 px wide), tables from `tables/*.tex`, captions from `figures/*.tex`. When the paper changes, recheck every number and caption. Figure and table numbers match the arXiv PDF (Figures 1 to 5 and 7, Tables 1, 5, 6 and 9).
-- **Videos.** The 22 clips are the ones in `static/videos` on the `pages` branch (built by `scripts/build_website_media.py` on `main`). They are H.264 High, yuv420p, `+faststart`, for the widest browser support. A VMAF-guided re-encode (x264 veryslow, CRF 24 to 30) could not make any clip smaller without dropping below VMAF 95.5, so the originals are served as is. Posters are the frame at 1 s, in `src/assets/posters/<group>/<clip>.webp`.
+- **Text, figures and tables** follow the `arxiv` branch of pawa-paper: figures from `figures/*.pdf` (rasterized at 2000 px wide), tables from `tables/*.tex`, captions from `figures/*.tex`. When the paper changes, recheck every number and caption. Figure and table numbers match the arXiv PDF (Figures 1 to 5 and 7, Tables 1, 5, 6 and 9).
+- **Videos.** The 22 clips are built by `tools/build_website_media.py` (see `docs/media.md`). They are H.264 High, yuv420p, `+faststart`, for the widest browser support. A VMAF-guided re-encode (x264 veryslow, CRF 24 to 30) could not make any clip smaller without dropping below VMAF 95.5, so the originals are served as is. Posters are the frame at 1 s, in `src/assets/posters/<group>/<clip>.webp`.
   To change a clip, copy it into `media/videos/<group>/`, bump `VERSION` in `scripts/upload-media.ts` and `mediaBase` in `site.ts` together (objects are cached as immutable), run `bun run media:upload`, then deploy.
 
 ## Performance notes
@@ -52,3 +54,9 @@ Wrangler needs `wrangler login`. The Cloudflare account is pinned in `wrangler.j
 - One HTML document with inlined CSS and JS (about 23 KB compressed). Hashed assets under `/_astro/` are cached for a year.
 - Only the hero loop and its poster load up front. Players use `preload="none"`, get their poster when within 800 px of the viewport, play while at least 35 % visible and pause otherwise. Autoplay is off under reduced motion or Save-Data.
 - Figures are lazy responsive AVIF/WebP; the full-resolution WebP loads only when a figure is opened.
+
+## Analytics
+
+Visits are counted by Cloudflare Web Analytics, which the `siki.moe` zone injects automatically
+(a small cookie-free beacon, no code in this repository). View it in the Cloudflare dashboard under
+Analytics & Logs, Web Analytics. Keep it enabled.
