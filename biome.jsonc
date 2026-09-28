@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "extends": ["ultracite/biome/core", "ultracite/biome/astro"],
+  "files": {
+    "includes": ["!**/dist", "!**/.astro", "!**/.wrangler", "!media"]
+  },
+  "overrides": [
+    {
+      // Astro components and layouts are PascalCase by convention.
+      "includes": ["apps/web/src/components/**", "apps/web/src/layouts/**"],
+      "linter": { "rules": { "style": { "useFilenamingConvention": "off" } } }
+    }
+  ]
+}

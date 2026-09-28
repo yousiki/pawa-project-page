@@ -1,0 +1,29 @@
+---
+interface Props {
+  class?: string;
+  eyebrow: string;
+  id: string;
+  title: string;
+}
+
+const { id, eyebrow, title, class: className } = Astro.props;
+---
+
+<section
+  id={id}
+  class:list={["mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28", className]}
+>
+  <header class="reveal mb-10 max-w-3xl sm:mb-14">
+    <p
+      class="mb-3 flex items-center gap-3 font-medium text-[13px] text-teal uppercase tracking-[0.18em]"
+    >
+      <span class="h-px w-8 bg-teal/60"></span>{eyebrow}
+    </p>
+    <h2
+      class="text-balance font-serif text-4xl leading-[1.05] tracking-tight sm:text-6xl"
+      set:html={title}
+    />
+    <slot name="lead" />
+  </header>
+  <slot />
+</section>

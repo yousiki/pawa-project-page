@@ -1,0 +1,34 @@
+---
+import { bibtex } from "../data/site";
+import Icon from "./Icon.astro";
+---
+
+<div
+  class="reveal relative overflow-hidden rounded-3xl bg-night text-white shadow-[0_30px_80px_-30px_rgb(6_8_12/0.6)] ring-1 ring-white/10"
+>
+  <div
+    class="flex items-center justify-between border-white/10 border-b px-5 py-3"
+  >
+    <span aria-hidden="true" class="flex gap-1.5">
+      <span class="size-3 rounded-full bg-white/15"></span
+      ><span class="size-3 rounded-full bg-white/15"></span
+      ><span class="size-3 rounded-full bg-white/15"></span>
+    </span>
+    <button
+      class="group inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 font-medium text-[13px] text-white/80 transition hover:bg-white/20 hover:text-white"
+      data-copy
+      type="button"
+    >
+      <span class="inline-flex items-center gap-2 group-data-[copied]:hidden"
+        ><Icon class="size-3.5" name="copy" />Copy</span
+      >
+      <span
+        class="hidden items-center gap-2 text-teal-soft group-data-[copied]:inline-flex"
+        ><Icon class="size-3.5" name="check" />Copied</span
+      >
+    </button>
+  </div>
+  <pre
+    class="overflow-x-auto p-5 font-mono text-[13px] text-white/85 leading-relaxed sm:p-7 sm:text-sm"
+  ><code data-bibtex>{bibtex}</code></pre>
+</div>

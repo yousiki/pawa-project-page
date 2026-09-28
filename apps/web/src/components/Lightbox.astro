@@ -1,0 +1,24 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<dialog
+  aria-label="Enlarged figure"
+  class="m-auto max-h-none max-w-none bg-transparent p-0 backdrop:bg-night/90 backdrop:backdrop-blur-sm open:animate-[reveal_0.35s_ease-out]"
+  data-lightbox
+>
+  <form class="fixed top-4 right-4 z-10" method="dialog">
+    <button
+      aria-label="Close"
+      class="grid size-10 place-items-center rounded-full bg-white/10 text-white backdrop-blur transition hover:bg-white/20"
+      type="submit"
+    >
+      <Icon class="size-5" name="x" />
+    </button>
+  </form>
+  <img
+    alt=""
+    class="max-h-[92svh] w-[min(96vw,2000px)] rounded-xl bg-white object-contain p-3"
+    decoding="async"
+  >
+</dialog>

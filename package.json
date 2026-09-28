@@ -1,0 +1,33 @@
+{
+  "name": "pawa-site",
+  "private": true,
+  "type": "module",
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ],
+    "catalog": {
+      "typescript": "^6.0.3"
+    }
+  },
+  "scripts": {
+    "build": "bun run --filter web build",
+    "check": "bun run --filter web check && ultracite check",
+    "deploy": "bun run --filter web deploy",
+    "dev": "bun run --filter web dev",
+    "fix": "ultracite fix",
+    "media:upload": "bun run scripts/upload-media.ts",
+    "og": "bun run scripts/make-og.ts",
+    "preview": "bun run --filter web preview"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.14",
+    "@pawa-site/config": "workspace:*",
+    "@types/bun": "latest",
+    "sharp": "^0.35.5",
+    "typescript": "catalog:",
+    "ultracite": "^7.12.1"
+  },
+  "packageManager": "bun@1.4.2"
+}

@@ -1,0 +1,25 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/alaya-lab.png";
+import { site } from "../data/site";
+---
+
+<footer class="border-line border-t">
+  <div
+    class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-5 py-12 text-muted text-sm sm:flex-row sm:px-8"
+  >
+    <div class="flex items-center gap-4">
+      <Image
+        alt="Alaya Lab"
+        class="h-auto w-10 opacity-80"
+        src={logo}
+        width={40}
+      />
+      <p>
+        <span class="font-semibold text-ink">{site.name}</span>
+        · {site.affiliations.join(" · ")}
+      </p>
+    </div>
+    <p>© {site.year} The {site.name} authors</p>
+  </div>
+</footer>

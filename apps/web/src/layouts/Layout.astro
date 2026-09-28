@@ -1,0 +1,91 @@
+---
+import { Font } from "astro:assets";
+import "../styles/global.css";
+import { pdfUrl, site } from "../data/site";
+
+interface Props {
+  description?: string;
+  /** Above-the-fold image to fetch early, such as the hero poster. */
+  preloadImage?: string;
+  title?: string;
+}
+
+const {
+  title = site.title,
+  description = site.description,
+  preloadImage,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = new URL("/og.jpg", site.url).href;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  author: site.authors.map((a) => ({
+    "@type": "Person",
+    affiliation: a.affiliations.map((i) => ({
+      "@type": "Organization",
+      name: site.affiliations[i - 1],
+    })),
+    name: a.name,
+  })),
+  datePublished: String(site.year),
+  description: site.description,
+  headline: site.title,
+  image: ogImage,
+  url: site.url,
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+      name="viewport"
+    >
+    <title>{title}</title>
+    <meta content={description} name="description">
+    <link href={canonical} rel="canonical">
+    <meta content="#06080c" name="theme-color">
+    <link href="/favicon.svg" rel="icon" type="image/svg+xml">
+    <link href="/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href={new URL(site.mediaBase).origin} rel="preconnect">
+    {preloadImage && (
+  <link as="image" fetchpriority="high" href={preloadImage} rel="preload" />
+)}
+
+    <Font cssVariable="--font-inter" preload />
+    <Font cssVariable="--font-instrument" preload={[{ style: "normal" }]} />
+    <Font cssVariable="--font-jetbrains" />
+
+    <meta content="article" property="og:type">
+    <meta content={site.name} property="og:site_name">
+    <meta content={title} property="og:title">
+    <meta content={description} property="og:description">
+    <meta content={canonical} property="og:url">
+    <meta content={ogImage} property="og:image">
+    <meta content="1200" property="og:image:width">
+    <meta content="630" property="og:image:height">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content={title} name="twitter:title">
+    <meta content={description} name="twitter:description">
+    <meta content={ogImage} name="twitter:image">
+
+    <!-- Google Scholar -->
+    <meta content={site.title} name="citation_title">
+    {site.authors.map((a) => <meta content={a.name} name="citation_author" />)}
+    <meta content={String(site.year)} name="citation_publication_date">
+    {pdfUrl && <meta content={pdfUrl} name="citation_pdf_url" />}
+
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(jsonLd)}
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

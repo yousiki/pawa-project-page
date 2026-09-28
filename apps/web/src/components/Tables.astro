@@ -1,0 +1,107 @@
+---
+import { tables } from "../data/tables";
+
+/** Splits a cell into its text and emphasis, following the ** and __ markers of the table data. */
+function parse(cell: string): { text: string; best: boolean; second: boolean } {
+  const best = cell.startsWith("**");
+  const second = cell.startsWith("__");
+  return { best, second, text: best || second ? cell.slice(2, -2) : cell };
+}
+
+const NUMERIC = /^[\d.]+$/;
+const isNumeric = (text: string) => NUMERIC.test(text);
+---
+
+<div
+  class="reveal overflow-hidden rounded-3xl bg-white shadow-[0_1px_2px_rgb(11_13_18/0.04),0_20px_50px_-20px_rgb(11_13_18/0.18)] ring-1 ring-line"
+  data-tabs
+>
+  <div
+    aria-label="Paper tables"
+    class="flex gap-1 overflow-x-auto border-line border-b bg-paper/60 p-2 [scrollbar-width:none]"
+    role="tablist"
+  >
+    {tables.map((t, i) => (
+  <button
+    aria-controls={`panel-${t.id}`}
+    aria-selected={i === 0 ? "true" : "false"}
+    class="shrink-0 rounded-full px-4 py-2 font-medium text-muted text-sm transition hover:text-ink aria-selected:bg-ink aria-selected:text-white"
+    id={`tab-${t.id}`}
+    role="tab"
+    type="button"
+  >
+    {t.tab}
+    <span class="ml-1.5 font-normal opacity-60">{t.title}</span>
+  </button>
+))}
+  </div>
+  {tables.map((t, i) => (
+  <div
+    aria-labelledby={`tab-${t.id}`}
+    hidden={i !== 0}
+    id={`panel-${t.id}`}
+    role="tabpanel"
+  >
+    <div class="overflow-x-auto">
+      <table class="tabular w-full min-w-[720px] border-collapse text-sm">
+        <thead>
+          <tr class="border-line border-b text-muted text-xs uppercase tracking-wider">
+            {t.head.map((h, j) => (
+              <th
+                class:list={[
+                  "whitespace-nowrap px-4 py-3.5 font-medium",
+                  j >= t.head.length - 5 ? "text-right" : "text-left",
+                ]}
+                scope="col"
+              >
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {t.rows.map((r) => (
+            <tr
+              class:list={[
+                "transition-colors hover:bg-paper",
+                r.ours && "bg-teal/[0.045]",
+                r.sep ? "border-ink/15 border-t" : "border-line border-t",
+              ]}
+            >
+              {r.group && (
+                <th
+                  class="bg-white px-4 py-2.5 text-left align-top font-semibold text-base"
+                  rowspan={r.group.span}
+                  scope="rowgroup"
+                >
+                  {r.group.label}
+                </th>
+              )}
+              {r.cells.map((c, j) => {
+                const { text, best, second } = parse(c);
+                return (
+                  <td
+                    class:list={[
+                      "whitespace-nowrap px-4 py-2.5",
+                      isNumeric(text) ? "text-right" : "text-left",
+                      j === 0 && r.ours && "font-semibold text-teal",
+                      best && "font-semibold text-ink",
+                      second &&
+                        "underline decoration-ink/40 underline-offset-4",
+                    ]}
+                  >
+                    {text}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="border-line border-t px-5 py-4 text-[13px] text-muted leading-relaxed">
+      <span class="font-semibold text-ink">Paper {t.title}.</span> {t.caption}
+    </p>
+  </div>
+))}
+</div>

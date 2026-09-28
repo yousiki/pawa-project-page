@@ -1,0 +1,16 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  // Assets-only Worker: no script runs, Cloudflare serves the prebuilt Astro output directly.
+  "name": "pawa-site",
+  "account_id": "3ba1aaf889ad9e15eebee459ff361919",
+  "compatibility_date": "2026-09-28",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "routes": [{ "pattern": "pawa.siki.moe", "custom_domain": true }],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": { "enabled": false }
+}
