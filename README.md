@@ -44,7 +44,7 @@ Wrangler needs `wrangler login`. The Cloudflare account is pinned in `wrangler.j
 
 ## Content
 
-- **arXiv link.** Set `arxivId` in `apps/web/src/data/site.ts`. This enables the arXiv and PDF buttons, the nav button, the Google Scholar `citation_pdf_url` tag and the BibTeX `journal` field. Fill `code` and `dataset` on release.
+- **arXiv link.** Set `arxivId` in `apps/web/src/data/site.ts`. This enables the arXiv and PDF buttons, the nav button, the Google Scholar `citation_pdf_url` tag and the BibTeX `journal` field.
 - **Text, figures and tables** follow the `arxiv` branch of pawa-paper: figures from `figures/*.pdf` (rasterized at 2000 px wide), tables from `tables/*.tex`, captions from `figures/*.tex`. When the paper changes, recheck every number and caption. Figure and table numbers match the arXiv PDF (Figures 1 to 5 and 7, Tables 1, 5, 6 and 9).
 - **Videos.** The 22 clips are built by `tools/build_website_media.py` (see `docs/media.md`). They are H.264 High, yuv420p, `+faststart`, for the widest browser support. A VMAF-guided re-encode (x264 veryslow, CRF 24 to 30) could not make any clip smaller without dropping below VMAF 95.5, so the originals are served as is. Posters are the frame at 1 s, in `src/assets/posters/<group>/<clip>.webp`.
   To change a clip, copy it into `media/videos/<group>/`, bump `VERSION` in `scripts/upload-media.ts` and `mediaBase` in `site.ts` together (objects are cached as immutable), run `bun run media:upload`, then deploy.
