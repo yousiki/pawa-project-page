@@ -4,12 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "astro": "astro",
-    "build": "astro build",
-    "check": "astro check",
-    "deploy": "astro build && wrangler deploy",
-    "dev": "astro dev",
-    "preview": "wrangler dev"
+    "astro": "bunx --bun astro",
+    "build": "bunx --bun astro build",
+    "check": "bunx --bun astro check",
+    "deploy": "bunx --bun astro build && bunx --bun wrangler deploy",
+    "dev": "bunx --bun astro dev",
+    "preview": "bunx --bun wrangler dev"
   },
   "dependencies": {
     "astro": "^7.3.5"
