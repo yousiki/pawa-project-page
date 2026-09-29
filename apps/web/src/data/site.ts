@@ -18,7 +18,7 @@ export const site = {
     { affiliations: [2], marks: ["*"], name: "Yimu Wang" },
     { affiliations: [1, 2, 3], name: "Ziqi Cai" },
     { affiliations: [2], name: "Chengxuan Zhu" },
-    { affiliations: [4], name: "Shuchen Weng" },
+    { affiliations: [2, 4], name: "Shuchen Weng" },
     { affiliations: [3], name: "Erwin Wu" },
     { affiliations: [2], name: "Zhaofei Yu" },
     { affiliations: [1], marks: ["‡"], name: "Kaipeng Zhang" },
