@@ -9,7 +9,6 @@ export const site = {
     "Alaya Lab",
     "Peking University",
     "Institute of Science Tokyo",
-    "Beijing Academy of Artificial Intelligence",
   ],
   /** Set once the paper is announced, e.g. "2610.01234". */
   arxivId: null as string | null,
@@ -18,7 +17,7 @@ export const site = {
     { affiliations: [2], marks: ["*"], name: "Yimu Wang" },
     { affiliations: [1, 2, 3], name: "Ziqi Cai" },
     { affiliations: [2], name: "Chengxuan Zhu" },
-    { affiliations: [2, 4], name: "Shuchen Weng" },
+    { affiliations: [2], name: "Shuchen Weng" },
     { affiliations: [3], name: "Erwin Wu" },
     { affiliations: [2], name: "Zhaofei Yu" },
     { affiliations: [1], marks: ["‡"], name: "Kaipeng Zhang" },
