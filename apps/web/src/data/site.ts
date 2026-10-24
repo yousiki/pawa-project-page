@@ -11,7 +11,7 @@ export const site = {
     "Institute of Science Tokyo",
   ],
   /** Set once the paper is announced, e.g. "2610.01234". */
-  arxivId: null as string | null,
+  arxivId: "2610.20240" as string | null,
   authors: [
     { affiliations: [1, 2], marks: ["*"], name: "Siqi Yang" },
     { affiliations: [2], marks: ["*"], name: "Yimu Wang" },
