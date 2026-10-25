@@ -8,7 +8,7 @@ folded into a near-square grid. All clips are 240 frames at 20 Hz (frame zero is
 condition), H.264 without audio or container metadata.
 
 python3 tools/build_website_media.py --out media/videos \
-    --gwp-local <gamma-world-pano/local> --external <dir with solaris/, multiworld/, n08/, n16/ copies> \
+    --gwp-local <evaluation outputs root> --external <dir with solaris/, multiworld/, n08/, n16/ copies> \
     --collector <regional-camera delivery dir> --showcase <archived showcase delivery dir>
 
 `--external` holds the paper-source copies of the aligned Solaris rerun, the official

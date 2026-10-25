@@ -5,7 +5,7 @@ Moved here from `docs/website.md` in yousiki/pawa-paper when the page tooling le
 ## Building the clips
 
 `tools/build_website_media.py` composes every model and stream of one episode into one synchronized
-H.264 clip. It needs the evaluation outputs on shanda (see its docstring) and writes
+H.264 clip. It needs the local evaluation outputs (see its docstring) and writes
 `media/videos/<group>/<episode>.mp4`. Posters are the frame at 1 s:
 
 ```sh
@@ -25,7 +25,7 @@ Episode selection: the seven two-player episodes were chosen by checking the gro
 
 Episode curation (latest): every shown clip was checked by eye against the reference at 12 forecast times for obvious generation inconsistencies (close-range blobs, hallucinated faces, scene drift) and for co-players in view. Two-player: tw16, tw18, ez03, cv04 (cv04 is a development episode), plus ez05 as Episode E, added at the owner's request. Four: n04c11. Eight: n08c11. Sixteen: n16c07, the least-flawed of 12; no sixteen-player episode is fully free of dark or blurred views.
 
-Experiments layout: each block is a paper figure (Figures 4, 5 and 7, exported from figures/*-tight.pdf) followed by its videos, the figure episode first. The re-entry clips come from the pawa-simple workspace and are hash-checked against docs/evidence/reentry-examples-20260925; the reference is decoded from input.npz. Paper tables sit in one collapsed block, labelled with their paper numbers (1, 5-6, 9).
+Experiments layout: each block is a paper figure (Figures 4, 5 and 7, exported from figures/*-tight.pdf) followed by its videos, the figure episode first. The re-entry clips come from the re-entry evaluation and are hash-checked against the paper repository's provenance records; the reference is decoded from input.npz. Paper tables sit in one collapsed block, labelled with their paper numbers (1, 5-6, 9).
 
 ## ICLR anonymous page
 
