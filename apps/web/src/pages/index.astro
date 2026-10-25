@@ -105,14 +105,14 @@ const poster = await heroPoster();
       class="relative z-10 mx-auto -mt-16 grid max-w-6xl gap-4 px-5 sm:px-8 md:grid-cols-3"
     >
       {highlights.map((h) => (
-  <article class="reveal rounded-2xl bg-white p-6 shadow-[0_1px_2px_rgb(11_13_18/0.04),0_20px_50px_-20px_rgb(11_13_18/0.25)] ring-1 ring-line">
-    <div class="mb-4 grid size-10 place-items-center rounded-xl bg-gradient-to-br from-teal to-indigo text-white">
-      <Icon class="size-5" name={h.icon} />
-    </div>
-    <h3 class="mb-2 font-semibold text-lg tracking-tight">{h.title}</h3>
-    <p class="text-[15px] text-muted leading-relaxed">{h.text}</p>
-  </article>
-))}
+        <article class="reveal rounded-2xl bg-white p-6 shadow-[0_1px_2px_rgb(11_13_18/0.04),0_20px_50px_-20px_rgb(11_13_18/0.25)] ring-1 ring-line">
+          <div class="mb-4 grid size-10 place-items-center rounded-xl bg-gradient-to-br from-teal to-indigo text-white">
+            <Icon class="size-5" name={h.icon} />
+          </div>
+          <h3 class="mb-2 font-semibold text-lg tracking-tight">{h.title}</h3>
+          <p class="text-[15px] text-muted leading-relaxed">{h.text}</p>
+        </article>
+      ))}
     </div>
 
     <Section
@@ -165,15 +165,15 @@ const poster = await heroPoster();
           class="reveal max-w-3xl space-y-5 text-[17px] text-ink/85 leading-[1.75]"
         >
           {abstract.map((p, i) => (
-  <p
-    class:list={[
-      i === 0 &&
-        "first-letter:float-left first-letter:mr-3 first-letter:font-serif first-letter:text-[4.2rem] first-letter:leading-[0.8] first-letter:text-teal",
-    ]}
-  >
-    {p}
-  </p>
-))}
+            <p
+              class:list={[
+                i === 0 &&
+                  "first-letter:float-left first-letter:mr-3 first-letter:font-serif first-letter:text-[4.2rem] first-letter:leading-[0.8] first-letter:text-teal",
+              ]}
+            >
+              {p}
+            </p>
+          ))}
         </div>
       </div>
     </section>
@@ -267,12 +267,14 @@ const poster = await heroPoster();
 
         <div class="mb-14 grid gap-4 md:grid-cols-3">
           {components.map((c) => (
-  <article class="reveal rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition hover:border-white/20 hover:bg-white/[0.06]">
-    <p class="mb-5 font-mono text-teal-soft text-xs">{c.step}</p>
-    <h3 class="mb-2 font-semibold text-lg tracking-tight">{c.title}</h3>
-    <p class="text-[15px] text-white/60 leading-relaxed">{c.text}</p>
-  </article>
-))}
+            <article class="reveal rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition hover:border-white/20 hover:bg-white/[0.06]">
+              <p class="mb-5 font-mono text-teal-soft text-xs">{c.step}</p>
+              <h3 class="mb-2 font-semibold text-lg tracking-tight">
+                {c.title}
+              </h3>
+              <p class="text-[15px] text-white/60 leading-relaxed">{c.text}</p>
+            </article>
+          ))}
         </div>
 
         <Figure
@@ -327,14 +329,16 @@ const poster = await heroPoster();
         class="mb-20 grid grid-cols-2 gap-px overflow-hidden rounded-3xl bg-line ring-1 ring-line lg:grid-cols-4"
       >
         {stats.map((s) => (
-  <div class="reveal bg-white p-6 sm:p-8">
-    <p class="tabular font-semibold text-4xl text-gradient-dark tracking-tight sm:text-5xl">
-      {s.value}
-    </p>
-    <p class="tabular mt-1 font-medium text-muted text-sm">{s.versus}</p>
-    <p class="mt-4 text-[13px] text-muted leading-snug">{s.label}</p>
-  </div>
-))}
+          <div class="reveal bg-white p-6 sm:p-8">
+            <p class="tabular font-semibold text-4xl text-gradient-dark tracking-tight sm:text-5xl">
+              {s.value}
+            </p>
+            <p class="tabular mt-1 font-medium text-muted text-sm">
+              {s.versus}
+            </p>
+            <p class="mt-4 text-[13px] text-muted leading-snug">{s.label}</p>
+          </div>
+        ))}
       </div>
 
       <div class="space-y-24">

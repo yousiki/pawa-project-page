@@ -36,31 +36,31 @@ const tabs = episodes.map((e, i) => ({
 <div
   data-player
   class:list={[
-  "reveal rounded-[1.4rem] bg-night text-white shadow-[0_30px_80px_-30px_rgb(6_8_12/0.6)] ring-1 ring-white/10",
-  compact ? "p-2" : "p-2 sm:p-3",
-]}
+    "reveal rounded-[1.4rem] bg-night text-white shadow-[0_30px_80px_-30px_rgb(6_8_12/0.6)] ring-1 ring-white/10",
+    compact ? "p-2" : "p-2 sm:p-3",
+  ]}
 >
   {tabs.length > 1 && (
-  <div
-    aria-label={label}
-    class="flex gap-1 overflow-x-auto p-1 pb-2 [scrollbar-width:none]"
-    role="tablist"
-  >
-    {tabs.map((t, i) => (
-      <button
-        aria-selected={i === 0 ? "true" : "false"}
-        class="shrink-0 rounded-full px-3.5 py-1.5 font-medium text-[13px] text-white/60 transition hover:bg-white/8 hover:text-white aria-selected:bg-white aria-selected:text-night"
-        data-poster={t.poster}
-        data-ratio={`${t.width} / ${t.height}`}
-        data-src={t.src}
-        role="tab"
-        type="button"
-      >
-        {t.label}
-      </button>
-    ))}
-  </div>
-)}
+    <div
+      aria-label={label}
+      class="flex gap-1 overflow-x-auto p-1 pb-2 [scrollbar-width:none]"
+      role="tablist"
+    >
+      {tabs.map((t, i) => (
+        <button
+          aria-selected={i === 0 ? "true" : "false"}
+          class="shrink-0 rounded-full px-3.5 py-1.5 font-medium text-[13px] text-white/60 transition hover:bg-white/8 hover:text-white aria-selected:bg-white aria-selected:text-night"
+          data-poster={t.poster}
+          data-ratio={`${t.width} / ${t.height}`}
+          data-src={t.src}
+          role="tab"
+          type="button"
+        >
+          {t.label}
+        </button>
+      ))}
+    </div>
+  )}
   <div
     class="relative overflow-hidden rounded-2xl bg-black"
     style={`aspect-ratio: ${first.width} / ${first.height}`}

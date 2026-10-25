@@ -53,8 +53,8 @@ const jsonLd = {
     <link href="/apple-touch-icon.png" rel="apple-touch-icon">
     <link href={new URL(site.mediaBase).origin} rel="preconnect">
     {preloadImage && (
-  <link as="image" fetchpriority="high" href={preloadImage} rel="preload" />
-)}
+      <link as="image" fetchpriority="high" href={preloadImage} rel="preload" />
+    )}
 
     <Font cssVariable="--font-inter" preload />
     <Font cssVariable="--font-instrument" preload={[{ style: "normal" }]} />
