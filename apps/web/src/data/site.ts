@@ -25,7 +25,9 @@ export const site = {
   ] satisfies Author[],
   /** Public repositories. */
   code: "https://github.com/yousiki/pawa-pipeline" as string | null,
-  dataset: "https://huggingface.co/datasets/YOUSIKI/pawa-dataset" as string | null,
+  dataset: "https://huggingface.co/datasets/YOUSIKI/pawa-dataset" as
+    | string
+    | null,
   description:
     "PAWA is a dataset and framework for action-conditioned panoramic multiplayer world modeling in Minecraft. A dual-tower model jointly predicts every player's POV and world-stabilized panoramic video.",
   /** Videos live in R2 behind this domain; bump the version prefix when a clip changes. */

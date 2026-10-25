@@ -1,0 +1,31 @@
+# Weekly dependency updates. Minor and patch bumps are grouped into one PR per ecosystem and
+# merged automatically once CI passes (see the automerge job in workflows/ci.yml); majors stay
+# open for review.
+version: 2
+updates:
+  - package-ecosystem: bun
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Asia/Shanghai
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+    commit-message:
+      prefix: deps
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Asia/Shanghai
+    groups:
+      actions:
+        update-types: [minor, patch]
+    commit-message:
+      prefix: ci

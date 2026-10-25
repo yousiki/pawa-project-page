@@ -40,7 +40,14 @@ bun run media:upload   # push media/videos to R2 (see below)
 bun run og             # regenerate apps/web/public/og.jpg
 ```
 
-Wrangler needs `wrangler login`. The Cloudflare account is pinned in `wrangler.jsonc`.
+Wrangler needs `wrangler login` for a local deploy. The Cloudflare account is pinned in `wrangler.jsonc`.
+
+## CI and deployment
+
+- `.github/workflows/ci.yml` runs `bun run check` and `bun run build` on every pull request and push to `main`.
+- `.github/workflows/deploy.yml` deploys to Cloudflare on every push to `main` that touches the site (and on manual dispatch). It needs the repository secret `CLOUDFLARE_API_TOKEN`, an API token made from the *Edit Cloudflare Workers* template, scoped to this account and the `siki.moe` zone. Store it as a secret of the `production` environment (a plain repository secret also works).
+- `.github/dependabot.yml` opens grouped dependency PRs every Monday for Bun packages and GitHub Actions. Minor and patch groups are squash-merged by the `automerge` job once CI passes, which then dispatches a deploy. Major updates stay open for review.
+- Media in R2 are not part of CI; upload them with `bun run media:upload` as before.
 
 ## Content
 
