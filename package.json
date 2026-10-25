@@ -22,7 +22,7 @@
     "preview": "bun run --filter web preview"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.14",
+    "@biomejs/biome": "^2.6.2",
     "@pawa-site/config": "workspace:*",
     "@types/bun": "latest",
     "sharp": "^0.35.5",
