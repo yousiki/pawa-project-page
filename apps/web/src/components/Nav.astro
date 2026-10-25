@@ -27,22 +27,22 @@ const sections = [
       class="mx-auto flex items-center overflow-x-auto [scrollbar-width:none] sm:mx-0"
     >
       {sections.map(([id, label]) => (
-  <a
-    class="whitespace-nowrap rounded-full px-2.5 py-1.5 transition hover:text-white aria-[current=true]:bg-white/10 aria-[current=true]:text-white sm:px-3"
-    data-nav-link={id}
-    href={`#${id}`}
-  >
-    {label}
-  </a>
-))}
+        <a
+          class="whitespace-nowrap rounded-full px-2.5 py-1.5 transition hover:text-white aria-[current=true]:bg-white/10 aria-[current=true]:text-white sm:px-3"
+          data-nav-link={id}
+          href={`#${id}`}
+        >
+          {label}
+        </a>
+      ))}
     </div>
     {arxivUrl && (
-  <a
-    class="ml-1 hidden rounded-full bg-white px-3.5 py-1.5 font-medium text-night transition hover:bg-teal-soft sm:inline-block"
-    href={arxivUrl}
-  >
-    arXiv
-  </a>
-)}
+      <a
+        class="ml-1 hidden rounded-full bg-white px-3.5 py-1.5 font-medium text-night transition hover:bg-teal-soft sm:inline-block"
+        href={arxivUrl}
+      >
+        arXiv
+      </a>
+    )}
   </div>
 </nav>

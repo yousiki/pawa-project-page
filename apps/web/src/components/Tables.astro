@@ -22,86 +22,86 @@ const isNumeric = (text: string) => NUMERIC.test(text);
     role="tablist"
   >
     {tables.map((t, i) => (
-  <button
-    aria-controls={`panel-${t.id}`}
-    aria-selected={i === 0 ? "true" : "false"}
-    class="shrink-0 rounded-full px-4 py-2 font-medium text-muted text-sm transition hover:text-ink aria-selected:bg-ink aria-selected:text-white"
-    id={`tab-${t.id}`}
-    role="tab"
-    type="button"
-  >
-    {t.tab}
-    <span class="ml-1.5 font-normal opacity-60">{t.title}</span>
-  </button>
-))}
+      <button
+        aria-controls={`panel-${t.id}`}
+        aria-selected={i === 0 ? "true" : "false"}
+        class="shrink-0 rounded-full px-4 py-2 font-medium text-muted text-sm transition hover:text-ink aria-selected:bg-ink aria-selected:text-white"
+        id={`tab-${t.id}`}
+        role="tab"
+        type="button"
+      >
+        {t.tab}
+        <span class="ml-1.5 font-normal opacity-60">{t.title}</span>
+      </button>
+    ))}
   </div>
   {tables.map((t, i) => (
-  <div
-    aria-labelledby={`tab-${t.id}`}
-    hidden={i !== 0}
-    id={`panel-${t.id}`}
-    role="tabpanel"
-  >
-    <div class="overflow-x-auto">
-      <table class="tabular w-full min-w-[720px] border-collapse text-sm">
-        <thead>
-          <tr class="border-line border-b text-muted text-xs uppercase tracking-wider">
-            {t.head.map((h, j) => (
-              <th
-                class:list={[
-                  "whitespace-nowrap px-4 py-3.5 font-medium",
-                  j >= t.head.length - 5 ? "text-right" : "text-left",
-                ]}
-                scope="col"
-              >
-                {h}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {t.rows.map((r) => (
-            <tr
-              class:list={[
-                "transition-colors hover:bg-paper",
-                r.ours && "bg-teal/[0.045]",
-                r.sep ? "border-ink/15 border-t" : "border-line border-t",
-              ]}
-            >
-              {r.group && (
+    <div
+      aria-labelledby={`tab-${t.id}`}
+      hidden={i !== 0}
+      id={`panel-${t.id}`}
+      role="tabpanel"
+    >
+      <div class="overflow-x-auto">
+        <table class="tabular w-full min-w-[720px] border-collapse text-sm">
+          <thead>
+            <tr class="border-line border-b text-muted text-xs uppercase tracking-wider">
+              {t.head.map((h, j) => (
                 <th
-                  class="bg-white px-4 py-2.5 text-left align-top font-semibold text-base"
-                  rowspan={r.group.span}
-                  scope="rowgroup"
+                  class:list={[
+                    "whitespace-nowrap px-4 py-3.5 font-medium",
+                    j >= t.head.length - 5 ? "text-right" : "text-left",
+                  ]}
+                  scope="col"
                 >
-                  {r.group.label}
+                  {h}
                 </th>
-              )}
-              {r.cells.map((c, j) => {
-                const { text, best, second } = parse(c);
-                return (
-                  <td
-                    class:list={[
-                      "whitespace-nowrap px-4 py-2.5",
-                      isNumeric(text) ? "text-right" : "text-left",
-                      j === 0 && r.ours && "font-semibold text-teal",
-                      best && "font-semibold text-ink",
-                      second &&
-                        "underline decoration-ink/40 underline-offset-4",
-                    ]}
-                  >
-                    {text}
-                  </td>
-                );
-              })}
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {t.rows.map((r) => (
+              <tr
+                class:list={[
+                  "transition-colors hover:bg-paper",
+                  r.ours && "bg-teal/[0.045]",
+                  r.sep ? "border-ink/15 border-t" : "border-line border-t",
+                ]}
+              >
+                {r.group && (
+                  <th
+                    class="bg-white px-4 py-2.5 text-left align-top font-semibold text-base"
+                    rowspan={r.group.span}
+                    scope="rowgroup"
+                  >
+                    {r.group.label}
+                  </th>
+                )}
+                {r.cells.map((c, j) => {
+                  const { text, best, second } = parse(c);
+                  return (
+                    <td
+                      class:list={[
+                        "whitespace-nowrap px-4 py-2.5",
+                        isNumeric(text) ? "text-right" : "text-left",
+                        j === 0 && r.ours && "font-semibold text-teal",
+                        best && "font-semibold text-ink",
+                        second &&
+                          "underline decoration-ink/40 underline-offset-4",
+                      ]}
+                    >
+                      {text}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="border-line border-t px-5 py-4 text-[13px] text-muted leading-relaxed">
+        <span class="font-semibold text-ink">Paper {t.title}.</span> {t.caption}
+      </p>
     </div>
-    <p class="border-line border-t px-5 py-4 text-[13px] text-muted leading-relaxed">
-      <span class="font-semibold text-ink">Paper {t.title}.</span> {t.caption}
-    </p>
-  </div>
-))}
+  ))}
 </div>

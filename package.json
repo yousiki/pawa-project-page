@@ -22,12 +22,12 @@
     "preview": "bun run --filter web preview"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.14",
+    "@biomejs/biome": "~2.5.15",
     "@pawa-site/config": "workspace:*",
     "@types/bun": "latest",
     "sharp": "^0.35.5",
     "typescript": "catalog:",
-    "ultracite": "^7.12.1"
+    "ultracite": "^8.0.1"
   },
   "packageManager": "bun@1.4.2"
 }
